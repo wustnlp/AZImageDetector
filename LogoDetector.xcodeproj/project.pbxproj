@@ -19,6 +19,7 @@
 		4951F8281E1F528B005BE3E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4951F8271E1F528B005BE3E8 /* Assets.xcassets */; };
 		4951F8371E1F6FA0005BE3E8 /* AZZImageDetector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4951F8341E1F6FA0005BE3E8 /* AZZImageDetector.mm */; };
 		4951F8381E1F6FA0005BE3E8 /* AZZImageUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4951F8361E1F6FA0005BE3E8 /* AZZImageUtils.mm */; };
+		4951F8941E2477F7005BE3E8 /* AZZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4951F8931E2477F7005BE3E8 /* AZZLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		4951F8341E1F6FA0005BE3E8 /* AZZImageDetector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AZZImageDetector.mm; sourceTree = "<group>"; };
 		4951F8351E1F6FA0005BE3E8 /* AZZImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZImageUtils.h; sourceTree = "<group>"; };
 		4951F8361E1F6FA0005BE3E8 /* AZZImageUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AZZImageUtils.mm; sourceTree = "<group>"; };
+		4951F8921E2477F7005BE3E8 /* AZZLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZLocationManager.h; sourceTree = "<group>"; };
+		4951F8931E2477F7005BE3E8 /* AZZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				4951F8341E1F6FA0005BE3E8 /* AZZImageDetector.mm */,
 				4951F8351E1F6FA0005BE3E8 /* AZZImageUtils.h */,
 				4951F8361E1F6FA0005BE3E8 /* AZZImageUtils.mm */,
+				4951F8921E2477F7005BE3E8 /* AZZLocationManager.h */,
+				4951F8931E2477F7005BE3E8 /* AZZLocationManager.m */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -197,6 +202,7 @@
 			files = (
 				4951F7FA1E1F3BA1005BE3E8 /* ViewController.mm in Sources */,
 				4951F8371E1F6FA0005BE3E8 /* AZZImageDetector.mm in Sources */,
+				4951F8941E2477F7005BE3E8 /* AZZLocationManager.m in Sources */,
 				4951F7F71E1F3BA1005BE3E8 /* AppDelegate.m in Sources */,
 				4951F7F41E1F3BA1005BE3E8 /* main.m in Sources */,
 				4951F8381E1F6FA0005BE3E8 /* AZZImageUtils.mm in Sources */,

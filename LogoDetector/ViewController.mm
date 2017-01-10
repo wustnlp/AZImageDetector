@@ -9,12 +9,17 @@
 #import "ViewController.h"
 
 #import "AZZImageDetector.h"
+#import "AZZLocationManager.h"
+
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 
 @interface ViewController ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 
 @property (nonatomic, strong) AZZImageDetector *detector;
+@property (nonatomic, strong) UILabel *lbLocation;
+@property (nonatomic, strong) UILabel *lbPlace;
 
 @end
 
@@ -59,6 +64,13 @@
                 break;
         }
     };
+    
+    [[AZZLocationManager sharedInstance] startUpdatingLocationWithBlock:^(NSArray<CLLocation *> *locations) {
+        self.lbLocation.text = locations.debugDescription;
+    } placeCallback:^(NSArray<CLPlacemark *> *placeMarks) {
+        self.lbPlace.text = placeMarks.debugDescription;
+    }];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -78,6 +90,28 @@
         _detector = [AZZImageDetector detectorWithImageView:self.imageView];
     }
     return _detector;
+}
+
+- (UILabel *)lbLocation {
+    if (!_lbLocation) {
+        _lbLocation = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREENWIDTH - 20, 300)];
+        _lbLocation.backgroundColor = [UIColor clearColor];
+        _lbLocation.font = [UIFont systemFontOfSize:15.f];
+        _lbLocation.numberOfLines = 0;
+        [self.view addSubview:_lbLocation];
+    }
+    return _lbLocation;
+}
+
+- (UILabel *)lbPlace {
+    if (!_lbPlace) {
+        _lbPlace = [[UILabel alloc] initWithFrame:CGRectMake(10, 320, SCREENWIDTH - 20, 300)];
+        _lbPlace.backgroundColor = [UIColor clearColor];
+        _lbPlace.font = [UIFont systemFontOfSize:15.f];
+        _lbPlace.numberOfLines = 0;
+        [self.view addSubview:_lbPlace];
+    }
+    return _lbPlace;
 }
 
 @end
