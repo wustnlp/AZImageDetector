@@ -42,7 +42,7 @@
     if ([method isEqualToString:@"POST"]) {
         serializer = self.postSerializer;
     }
-    NSURLRequest *request = [serializer requestWithMethod:method URLString:url parameters:param error:&error];
+    NSURLRequest *request = [serializer requestWithMethod:method URLString:[NSURL URLWithString:url relativeToURL:self.baseURL].absoluteString parameters:param error:&error];
     
     if (error) {
         if (fail) {
@@ -88,7 +88,7 @@
                             @"longitude" : longitude,
                             };
     NSError *error = nil;
-    NSURLRequest *request = [self.postSerializer multipartFormRequestWithMethod:@"POST" URLString:@"upload.do" parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLRequest *request = [self.postSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSURL URLWithString:@"upload.do" relativeToURL:self.baseURL].absoluteString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:image name:@"file" fileName:@"image.png" mimeType:@"image/png"];
     } error:&error];
     
