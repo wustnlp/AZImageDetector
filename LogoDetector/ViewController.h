@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZBaseViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : AZZBaseViewController
 
 
 @end

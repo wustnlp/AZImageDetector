@@ -7,19 +7,19 @@
 //
 
 #import "ViewController.h"
-
-#import "AZZImageDetector.h"
+#import <opencv2/highgui/cap_ios.h>
+#import "AZZImageUtils.h"
+#import "AZZClient.h"
 #import "AZZLocationManager.h"
 
-#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+@interface ViewController () <CvPhotoCameraDelegate, UITextFieldDelegate>
 
-@interface ViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *tfCost;
+@property (weak, nonatomic) IBOutlet UITextField *tfAmount;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIImageView *imgViewResult;
 
-@property (nonatomic, strong) AZZImageDetector *detector;
-@property (nonatomic, strong) UILabel *lbLocation;
-@property (nonatomic, strong) UILabel *lbPlace;
+@property (nonatomic, strong) CvPhotoCamera *camera;
 
 @end
 
@@ -29,89 +29,126 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self.detector setPatterns:@[[UIImage imageNamed:@"2000"], [UIImage imageNamed:@"2001"]]];
-    self.detector.successBlock = ^(int index) {
-        switch (index) {
-            case 0:
-            {
-                NSLog(@"detect 2000");
-                break;
-            }
-            case 1:
-            {
-                NSLog(@"detect 2001");
-                break;
-            }
-                
-            default:
-                break;
-        }
-    };
-    self.detector.failBlock = ^(int index) {
-        switch (index) {
-            case 0:
-            {
-                NSLog(@"lose 2000");
-                break;
-            }
-            case 1:
-            {
-                NSLog(@"lose 2001");
-                break;
-            }
-                
-            default:
-                break;
-        }
-    };
-    
-    [[AZZLocationManager sharedInstance] startUpdatingLocationWithBlock:^(NSArray<CLLocation *> *locations) {
-        self.lbLocation.text = locations.debugDescription;
-    } placeCallback:^(NSArray<CLPlacemark *> *placeMarks) {
-        self.lbPlace.text = placeMarks.debugDescription;
-    }];
-    
+    self.camera = [[CvPhotoCamera alloc] initWithParentView:self.imageView];
+    self.camera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self.camera.defaultAVCaptureSessionPreset = AVCaptureSessionPresetHigh;
+    self.camera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+    self.camera.defaultFPS = 30;
+    self.camera.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.detector startProcess];
+    [self.camera start];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.camera stop];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (AZZImageDetector *)detector {
-    if (!_detector) {
-        _detector = [AZZImageDetector detectorWithImageView:self.imageView];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.tfCost) {
+        [self.tfAmount becomeFirstResponder];
+    } else {
+        [self.tfAmount resignFirstResponder];
     }
-    return _detector;
+    return YES;
 }
 
-- (UILabel *)lbLocation {
-    if (!_lbLocation) {
-        _lbLocation = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREENWIDTH - 20, 300)];
-        _lbLocation.backgroundColor = [UIColor clearColor];
-        _lbLocation.font = [UIFont systemFontOfSize:15.f];
-        _lbLocation.numberOfLines = 0;
-        [self.view addSubview:_lbLocation];
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.tfCost) {
+        NSArray *costArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0", @".", @""];
+        return [costArray containsObject:string];
+    } else{
+        NSArray *amoutArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0", @""];
+        return [amoutArray containsObject:string];
     }
-    return _lbLocation;
 }
 
-- (UILabel *)lbPlace {
-    if (!_lbPlace) {
-        _lbPlace = [[UILabel alloc] initWithFrame:CGRectMake(10, 320, SCREENWIDTH - 20, 300)];
-        _lbPlace.backgroundColor = [UIColor clearColor];
-        _lbPlace.font = [UIFont systemFontOfSize:15.f];
-        _lbPlace.numberOfLines = 0;
-        [self.view addSubview:_lbPlace];
+- (void)photoCamera:(CvPhotoCamera *)photoCamera capturedImage:(UIImage *)image {
+    NSLog(@"captured");
+    [self dealWithImage:image];
+}
+
+- (void)photoCameraCancel:(CvPhotoCamera *)photoCamera {
+    NSLog(@"cancel");
+}
+
+- (IBAction)btnSendHongBao:(id)sender {
+    if (!self.imgViewResult.image) {
+        [self showHudWithTitle:@"Error" detail:@"图片为空"];
+        [self hideHudAfterDelay:2.f];
+        return;
     }
-    return _lbPlace;
+    if ([self.tfCost.text floatValue] == 0.0) {
+        [self showHudWithTitle:@"Error" detail:@"金额有误"];
+        [self hideHudAfterDelay:2.f];
+        return;
+    }
+    if ([self.tfAmount.text integerValue] == 0) {
+        [self showHudWithTitle:@"Error" detail:@"人数有误"];
+        [self hideHudAfterDelay:2.f];
+        return;
+    }
+    
+    [self showHudWithTitle:nil detail:nil];
+    [AZZLocationManagerInstance getCurrentGCJCoordinateWithBlock:^(CLLocationCoordinate2D location) {
+        NSString *lati = [@(location.latitude) stringValue];
+        NSString *longi = [@(location.longitude) stringValue];
+        NSString *cost = self.tfCost.text;
+        NSString *amout = self.tfAmount.text;
+        NSData *imageData = UIImagePNGRepresentation(self.imgViewResult.image);
+        [AZZClientInstance requestUploadHongBaoWith:imageData userId:@"abc" cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
+            [self showHudWithTitle:@"成功" detail:msg];
+            [self hideHudAfterDelay:3.f];
+        } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+            [self showHudWithTitle:msg detail:error.localizedDescription];
+            [self hideHudAfterDelay:3.f];
+        }];
+    }];
+}
+
+- (IBAction)btnTakePhoto:(id)sender {
+    [self.camera takePicture];
+}
+
+- (IBAction)btnReTakePhoto:(id)sender {
+    self.imgViewResult.hidden = YES;
+}
+
+- (void)dealWithImage:(UIImage *)image {
+    CGRect rect = [self.imageView convertRect:self.imgViewResult.frame fromView:self.imgViewResult.superview];
+    CGFloat imgFactor = image.size.width / image.size.height;
+    CGFloat viewFactor = CGRectGetWidth(self.imageView.frame) / CGRectGetHeight(self.imageView.frame);
+    CGFloat x, y, width, height;
+    if (viewFactor > imgFactor) {
+        CGFloat origHeight = CGRectGetWidth(self.imageView.frame) / imgFactor;
+        CGFloat offset = origHeight - CGRectGetHeight(self.imageView.frame);
+        CGFloat widFactor = image.size.width / CGRectGetWidth(self.imageView.frame);
+        x = CGRectGetMinX(rect) * widFactor;
+        y = (CGRectGetMinY(rect) + offset / 2.f) * widFactor;
+        width = CGRectGetWidth(rect) * widFactor;
+        height = CGRectGetHeight(rect) * widFactor;
+    } else {
+        CGFloat origWidth = CGRectGetHeight(self.imageView.frame) * imgFactor;
+        CGFloat offset = origWidth - CGRectGetWidth(self.imageView.frame);
+        CGFloat heightFactor = image.size.height / CGRectGetHeight(self.imageView.frame);
+        x = (CGRectGetMinX(rect) + offset / 2.f) * heightFactor;
+        y = CGRectGetMinY(rect) * heightFactor;
+        width = CGRectGetWidth(rect) * heightFactor;
+        height = CGRectGetHeight(rect) * heightFactor;
+    }
+    UIImage *result = [AZZImageUtils croppedImage:image InRect:CGRectMake(x, y, width, height)];
+    self.imgViewResult.image = result;
+    self.imgViewResult.hidden = NO;
 }
 
 @end
