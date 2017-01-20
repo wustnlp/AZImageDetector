@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "红包 (2).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "红包 (1).png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "toltal logo.png",
+      "filename" : "红包 (3).png",
       "scale" : "3x"
     }
   ],

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49150C891E30844B00638614 /* AZZHongBaoGotUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49150C881E30844B00638614 /* AZZHongBaoGotUserModel.m */; };
+		49150C8C1E308B0300638614 /* AZZHongBaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49150C8B1E308B0300638614 /* AZZHongBaoView.m */; };
+		49150C8E1E31E89400638614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49150C8D1E31E89400638614 /* Assets.xcassets */; };
 		4924C6381E289A0800EFDCDE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4924C6371E289A0800EFDCDE /* MapKit.framework */; };
 		4924C6401E289BC100EFDCDE /* AZZClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4924C63E1E289BC100EFDCDE /* AZZClient.m */; };
 		4924C6431E289BCE00EFDCDE /* AZZHongBaoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4924C6421E289BCE00EFDCDE /* AZZHongBaoModel.m */; };
@@ -27,11 +30,15 @@
 		4951F80E1E1F3C79005BE3E8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4951F80D1E1F3C79005BE3E8 /* AVFoundation.framework */; };
 		4951F8101E1F3C83005BE3E8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4951F80F1E1F3C83005BE3E8 /* AssetsLibrary.framework */; };
 		4951F8121E1F3C8A005BE3E8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4951F8111E1F3C8A005BE3E8 /* CoreMedia.framework */; };
-		4951F8281E1F528B005BE3E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4951F8271E1F528B005BE3E8 /* Assets.xcassets */; };
 		BF79371D60E40897DF21929E /* libPods-LogoDetector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49150C871E30844B00638614 /* AZZHongBaoGotUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZHongBaoGotUserModel.h; path = Model/AZZHongBaoGotUserModel.h; sourceTree = "<group>"; };
+		49150C881E30844B00638614 /* AZZHongBaoGotUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZHongBaoGotUserModel.m; path = Model/AZZHongBaoGotUserModel.m; sourceTree = "<group>"; };
+		49150C8A1E308B0300638614 /* AZZHongBaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZHongBaoView.h; path = View/AZZHongBaoView.h; sourceTree = "<group>"; };
+		49150C8B1E308B0300638614 /* AZZHongBaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZHongBaoView.m; path = View/AZZHongBaoView.m; sourceTree = "<group>"; };
+		49150C8D1E31E89400638614 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4924C6371E289A0800EFDCDE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4924C63D1E289BC100EFDCDE /* AZZClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZClient.h; path = Network/AZZClient.h; sourceTree = "<group>"; };
 		4924C63E1E289BC100EFDCDE /* AZZClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZClient.m; path = Network/AZZClient.m; sourceTree = "<group>"; };
@@ -68,7 +75,6 @@
 		4951F80D1E1F3C79005BE3E8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4951F80F1E1F3C83005BE3E8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		4951F8111E1F3C8A005BE3E8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		4951F8271E1F528B005BE3E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78AB7F00BFEFC728D9B25F30 /* Pods-LogoDetector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.debug.xcconfig"; sourceTree = "<group>"; };
 		7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogoDetector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F8311D55F40B38B9A90FBD /* Pods-LogoDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +115,8 @@
 				4924C6421E289BCE00EFDCDE /* AZZHongBaoModel.m */,
 				4924C6541E289FED00EFDCDE /* AZZMapAnnotation.h */,
 				4924C6551E289FED00EFDCDE /* AZZMapAnnotation.m */,
+				49150C871E30844B00638614 /* AZZHongBaoGotUserModel.h */,
+				49150C881E30844B00638614 /* AZZHongBaoGotUserModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -129,6 +137,8 @@
 		4924C63C1E289BB500EFDCDE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				49150C8A1E308B0300638614 /* AZZHongBaoView.h */,
+				49150C8B1E308B0300638614 /* AZZHongBaoView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -178,7 +188,7 @@
 				4924C63A1E289B3200EFDCDE /* Model */,
 				4924C6391E289B2900EFDCDE /* Network */,
 				4951F8091E1F3BCE005BE3E8 /* PrefixHeader.pch */,
-				4951F8271E1F528B005BE3E8 /* Assets.xcassets */,
+				49150C8D1E31E89400638614 /* Assets.xcassets */,
 				4951F7FB1E1F3BA1005BE3E8 /* Main.storyboard */,
 				4951F8001E1F3BA1005BE3E8 /* LaunchScreen.storyboard */,
 				4951F8031E1F3BA1005BE3E8 /* Info.plist */,
@@ -281,7 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4951F8021E1F3BA1005BE3E8 /* LaunchScreen.storyboard in Resources */,
-				4951F8281E1F528B005BE3E8 /* Assets.xcassets in Resources */,
+				49150C8E1E31E89400638614 /* Assets.xcassets in Resources */,
 				4951F7FD1E1F3BA1005BE3E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,9 +356,11 @@
 				4924C6531E289D8200EFDCDE /* AZZMapViewController.m in Sources */,
 				4951F7FA1E1F3BA1005BE3E8 /* ViewController.mm in Sources */,
 				4924C6591E28A31800EFDCDE /* AZZBaseViewController.m in Sources */,
+				49150C8C1E308B0300638614 /* AZZHongBaoView.m in Sources */,
 				4951F7F71E1F3BA1005BE3E8 /* AppDelegate.m in Sources */,
 				4924C6401E289BC100EFDCDE /* AZZClient.m in Sources */,
 				4924C64C1E289BE300EFDCDE /* AZZImageUtils.mm in Sources */,
+				49150C891E30844B00638614 /* AZZHongBaoGotUserModel.m in Sources */,
 				4924C64B1E289BE300EFDCDE /* AZZImageDetector.mm in Sources */,
 				4924C6561E289FED00EFDCDE /* AZZMapAnnotation.m in Sources */,
 				4951F7F41E1F3BA1005BE3E8 /* main.m in Sources */,

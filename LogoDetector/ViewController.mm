@@ -106,7 +106,7 @@
         NSString *cost = self.tfCost.text;
         NSString *amout = self.tfAmount.text;
         NSData *imageData = UIImagePNGRepresentation(self.imgViewResult.image);
-        [AZZClientInstance requestUploadHongBaoWith:imageData userId:@"abc" cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
+        [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
             [self showHudWithTitle:@"成功" detail:msg];
             [self hideHudAfterDelay:3.f];
         } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {

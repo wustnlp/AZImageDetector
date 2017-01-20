@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AZZClient.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [AZZClientInstance requestLoginWithUsername:@"admin" password:@"admin" success:^(NSString * _Nullable msg, id  _Nullable userid) {
+        NSLog(@"login success msg:%@ userid:%@", msg, userid);
+    } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+        NSLog(@"login fail msg:%@, error:%@", msg, error);
+    }];
     return YES;
 }
 

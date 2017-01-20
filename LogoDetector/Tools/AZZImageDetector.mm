@@ -172,7 +172,13 @@ using namespace cv;
                     std::vector<KeyPoint> kp1 = triggers_kps.at(i);
                     Mat desc1 = triggers_descs.at(i);
                     thread_over = NO;
-                    Mat image_copy = image.clone();
+                    int width = image.cols;
+                    int y = image.rows / 2.f - width / 2.f;
+                    cv::Point pt1 = cvPoint(0, y);
+                    cv::Point pt2 = cvPoint(width, y);
+                    cv::line(image, pt1, pt2, Scalar(0, 0, 0));
+                    cv::line(image, cvPoint(0, y + width), cvPoint(width, y + width), Scalar(0, 0, 0));
+                    Mat image_copy = image.clone()(cvRect(0, y, width, width));
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [self backgroundImageProcessing: image_copy pattern:patt keypoints:kp1 descriptor:desc1 index:i];
                         dispatch_sync(dispatch_get_main_queue(), ^{

@@ -9,7 +9,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AZZServerResources.h"
 
-@class AZZHongBaoModel, AZZClient;
+@class AZZHongBaoModel, AZZClient, AZZHongBaoGotUserModel;
 
 #define AZZClientInstance [AZZClient sharedInstance]
 
@@ -20,8 +20,12 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
 
 + (nonnull AZZClient *)sharedInstance;
 
+- (nullable NSURLSessionDataTask *)requestLoginWithUsername:(nonnull NSString *)userName
+                                                   password:(nonnull NSString *)password
+                                                    success:(nullable void (^)(NSString * _Nullable msg, id _Nullable userid))success
+                                                       fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
+
 - (nullable NSURLSessionDataTask *)requestUploadHongBaoWith:(nonnull NSData *)image
-                                                     userId:(nonnull NSString *)userId
                                                        cost:(nonnull NSString *)cost
                                                      amount:(nonnull NSString *)amount
                                                    latitude:(nonnull NSString *)latitude
@@ -35,7 +39,11 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
                                                                 fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail ;
 
 - (nullable NSURLSessionDataTask *)requestGetHongWithUUID:(nonnull NSString *)uuid
-                                               BaoSuccess:(nullable void (^)(NSString * _Nullable msg))success
+                                               BaoSuccess:(nullable void (^)(NSString * _Nullable msg, id _Nullable obj))success
                                                      fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
+
+- (nullable NSURLSessionDataTask *)requestGetGotUsersWithHongbaoID:(nonnull NSString *)hongbaoId
+                                                           success:(nullable void (^)(NSArray<AZZHongBaoGotUserModel *> * _Nullable users))success
+                                                              fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
 
 @end

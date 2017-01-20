@@ -101,6 +101,10 @@
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"HongBao"];
     if (!annotationView) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"HongBao"];
+        CGRect frame = annotationView.frame;
+        frame.size = CGSizeMake(40, 40);
+        annotationView.frame = frame;
+        annotationView.image = [UIImage imageNamed:@"hongbao_annotation"];
     }
     annotationView.draggable = NO;
     return annotationView;

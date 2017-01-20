@@ -14,9 +14,12 @@
     return @{
              @"cost"         : @"cost",
              @"idString"     : @"id",
+             @"userid"       : @"userid",
              @"latitude"     : @"latitude",
              @"longitude"    : @"longitude",
              @"remainAmount" : @"remainAmount",
+             @"remainCost"   : @"remainCost",
+             @"amount"       : @"amount",
              };
 }
 

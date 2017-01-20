@@ -8,6 +8,7 @@
 
 #import "AZZScanHongBaoViewController.h"
 #import "AZZHongBaoModel.h"
+#import "AZZHongBaoView.h"
 
 #import "AZZClient.h"
 #import "AZZImageDetector.h"
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) AZZImageDetector *detector;
 @property (nonatomic, strong) UIImage *imgPattern;
 
+@property (nonatomic, strong) AZZHongBaoView *hongbaoView;
+
 @property (nonatomic, strong) id<SDWebImageOperation> downloadOperation;
 
 @end
@@ -35,8 +38,13 @@
     [self setupConstraints];
     [self showHudWithTitle:nil detail:nil];
     
+    __weak typeof(self) wself = self;
     self.detector.successBlock = ^(int index) {
         NSLog(@"detect:%@", @(index));
+        if (!wself.hongbaoView) {
+            [wself.detector stopProcess];
+            wself.hongbaoView = [AZZHongBaoView showInView:wself.view.superview withModel:wself.model];
+        }
     };
     self.detector.failBlock = ^(int index) {
         NSLog(@"lose:%@", @(index));
@@ -76,6 +84,7 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
+        _imageView.contentMode = UIViewContentModeScaleToFill;
         [self.view addSubview:_imageView];
     }
     return _imageView;
@@ -88,12 +97,14 @@
         self.downloadOperation = [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             
         } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-            if (finished) {
-                [self.view class];
-                self.imgPattern = image;
-                [self.detector setPatterns:@[image]];
-                [self.detector startProcess];
-                [self hideHudAfterDelay:0];
+            if (finished && image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.view class];
+                    self.imgPattern = image;
+                    [self.detector setPatterns:@[image]];
+                    [self.detector startProcess];
+                    [self hideHudAfterDelay:0];
+                });
             }
         }];
     }
