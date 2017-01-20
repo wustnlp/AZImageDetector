@@ -43,7 +43,7 @@
         NSLog(@"detect:%@", @(index));
         if (!wself.hongbaoView) {
             [wself.detector stopProcess];
-            wself.hongbaoView = [AZZHongBaoView showInView:wself.view.superview withModel:wself.model];
+            wself.hongbaoView = [AZZHongBaoView showInView:wself.view withModel:wself.model];
         }
     };
     self.detector.failBlock = ^(int index) {
@@ -84,7 +84,7 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
-        _imageView.contentMode = UIViewContentModeScaleToFill;
+        _imageView.contentMode = UIViewContentModeCenter;
         [self.view addSubview:_imageView];
     }
     return _imageView;

@@ -15,6 +15,9 @@
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
+#define OpenButtonWidth 80.f
+#define SelfSize CGSizeMake(200.f, 300.f)
+
 @interface AZZHongBaoView () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UIButton *btnOpen;
@@ -34,15 +37,12 @@
 #pragma mark - Public
 
 + (instancetype)showInView:(UIView *)view withModel:(AZZHongBaoModel *)model {
-    AZZHongBaoView *instance = [[AZZHongBaoView alloc] initWithFrame:CGRectZero];
+    AZZHongBaoView *instance = [[AZZHongBaoView alloc] initWithFrame:CGRectMake(0, 0, SelfSize.width, SelfSize.height)];
+    instance.center = CGPointMake(view.bounds.size.width / 2.f, view.bounds.size.height / 2.f);
     instance.alpha = 0.f;
     [view addSubview:instance];
-    [instance mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(view);
-    }];
     instance.hongbaoModel = model;
     [UIView animateWithDuration:2.f animations:^{
-        instance.frame = view.bounds;
         instance.alpha = 1;
     }];
     return instance;
@@ -50,14 +50,11 @@
 
 - (void)showInView:(UIView *)view {
     self.alpha = 0.f;
-    self.frame = CGRectZero;
+    self.frame = CGRectMake(0, 0, SelfSize.width, SelfSize.height);
+    self.center = CGPointMake(view.bounds.size.width / 2.f, view.bounds.size.height / 2.f);
     [view addSubview:self];
-    [self mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(view);
-    }];
     [UIView animateWithDuration:2.f
                      animations:^{
-                         self.frame = view.bounds;
                          self.alpha = 1.f;
                      }];
 }
@@ -72,7 +69,7 @@
 - (void)setupConstaints {
     [self.btnOpen mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.and.centerY.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(80, 80));
+        make.size.mas_equalTo(CGSizeMake(OpenButtonWidth, OpenButtonWidth));
     }];
     [self.lbHongBao mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.equalTo(self).with.offset(5);
@@ -86,13 +83,15 @@
     }];
     [self.btnClose mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.and.right.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(10, 10));
+        make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
     [self bringSubviewToFront:self.btnClose];
 }
 
 - (void)btnOpenClicked:(UIButton *)button {
     self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.label.text = nil;
+    self.hud.detailsLabel.text = nil;
     [self.hud showAnimated:YES];
     [AZZClientInstance requestGetHongWithUUID:self.hongbaoModel.idString BaoSuccess:^(NSString * _Nullable msg, id  _Nullable obj) {
         self.lbHongBao.text = [NSString stringWithFormat:@"msg:%@ cost:%@", msg, obj];
@@ -108,7 +107,6 @@
 
 - (void)btnCloseClicked:(UIButton *)button {
     [UIView animateWithDuration:2.f animations:^{
-        self.frame = CGRectZero;
         self.alpha = 0.f;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
@@ -151,7 +149,7 @@
         _btnOpen = [[UIButton alloc] initWithFrame:CGRectZero];
         [_btnOpen setTitle:@"开" forState:UIControlStateNormal];
         _btnOpen.layer.backgroundColor = [UIColor redColor].CGColor;
-        _btnOpen.layer.cornerRadius = 50.f;
+        _btnOpen.layer.cornerRadius = OpenButtonWidth / 2.f;
         [_btnOpen addTarget:self action:@selector(btnOpenClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnOpen];
     }
@@ -194,6 +192,8 @@
 - (MBProgressHUD *)hud {
     if (!_hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self];
+        _hud.label.numberOfLines = 0;
+        _hud.detailsLabel.numberOfLines = 0;
         [self addSubview:_hud];
     }
     return _hud;
