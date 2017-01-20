@@ -136,9 +136,14 @@
                                                             longitude:(nonnull NSString *)longitude
                                                               success:(nullable void (^)(NSArray<AZZHongBaoModel *> * _Nullable arrHongBao))success
                                                                  fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail {
+    NSString *userid = @"";
+    if (self.userid) {
+        userid = [self.userid stringValue];
+    }
     NSDictionary *param = @{
                             @"longitude" : longitude,
                             @"latitude"  : latitude,
+                            @"userid"    : userid,
                             };
     return [self requestWithURL:@"getRelated.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
             NSString *msg = [responseObject objectForKey:@"msg"];

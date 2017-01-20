@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 
+@property (nonatomic, assign) BOOL opened;
+
 @end
 
 @implementation AZZHongBaoView
@@ -42,7 +44,8 @@
     instance.alpha = 0.f;
     [view addSubview:instance];
     instance.hongbaoModel = model;
-    [UIView animateWithDuration:2.f animations:^{
+    instance.opened = NO;
+    [UIView animateWithDuration:1.f animations:^{
         instance.alpha = 1;
     }];
     return instance;
@@ -57,6 +60,14 @@
                      animations:^{
                          self.alpha = 1.f;
                      }];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor redColor];
+    }
+    return self;
 }
 
 #pragma mark - 
@@ -106,17 +117,22 @@
 }
 
 - (void)btnCloseClicked:(UIButton *)button {
-    [UIView animateWithDuration:2.f animations:^{
+    [UIView animateWithDuration:1.f animations:^{
         self.alpha = 0.f;
     } completion:^(BOOL finished) {
+        if ([self.delegate respondsToSelector:@selector(hongbaoViewCancel:opened:)]) {
+            [self.delegate hongbaoViewCancel:self opened:self.opened];
+        }
         [self removeFromSuperview];
     }];
 }
 
 - (void)openSuccess {
+    [self.hud hideAnimated:YES];
     self.btnOpen.hidden = YES;
     self.lbHongBao.hidden = NO;
     self.tbResults.hidden = NO;
+    self.opened = YES;
     [AZZClientInstance requestGetGotUsersWithHongbaoID:self.hongbaoModel.idString success:^(NSArray<AZZHongBaoGotUserModel *> * _Nullable users) {
         self.gotUsers = users;
         [self.tbResults reloadData];
@@ -148,7 +164,7 @@
     if (!_btnOpen) {
         _btnOpen = [[UIButton alloc] initWithFrame:CGRectZero];
         [_btnOpen setTitle:@"开" forState:UIControlStateNormal];
-        _btnOpen.layer.backgroundColor = [UIColor redColor].CGColor;
+        _btnOpen.layer.backgroundColor = [UIColor colorWithRed:1.000 green:0.667 blue:0.231 alpha:1.000].CGColor;
         _btnOpen.layer.cornerRadius = OpenButtonWidth / 2.f;
         [_btnOpen addTarget:self action:@selector(btnOpenClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_btnOpen];

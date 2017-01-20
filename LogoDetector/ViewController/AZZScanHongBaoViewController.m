@@ -16,9 +16,11 @@
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImageDownloader.h>
 
-@interface AZZScanHongBaoViewController ()
+@interface AZZScanHongBaoViewController () <AZZHongBaoViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIButton *btnView;
+@property (nonatomic, strong) UIImageView *imageSee;
 
 @property (nonatomic, strong) AZZImageDetector *detector;
 @property (nonatomic, strong) UIImage *imgPattern;
@@ -41,9 +43,12 @@
     __weak typeof(self) wself = self;
     self.detector.successBlock = ^(int index) {
         NSLog(@"detect:%@", @(index));
+        [wself.detector stopProcess];
         if (!wself.hongbaoView) {
-            [wself.detector stopProcess];
             wself.hongbaoView = [AZZHongBaoView showInView:wself.view withModel:wself.model];
+            wself.hongbaoView.delegate = wself;
+        } else {
+            [wself.hongbaoView showInView:wself.view];
         }
     };
     self.detector.failBlock = ^(int index) {
@@ -70,6 +75,32 @@
         make.top.equalTo(self.view).with.offset(64.f);
         make.left.and.right.and.bottom.equalTo(self.view);
     }];
+    [self.btnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(self.imageView);
+        make.size.mas_equalTo(CGSizeMake(80, 40));
+    }];
+    [self.imageSee mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.equalTo(self.imageView);
+        make.size.mas_equalTo(CGSizeMake(80, 80));
+    }];
+}
+
+- (void)hongbaoViewCancel:(AZZHongBaoView *)hongbaoView opened:(BOOL)opened {
+    if (hongbaoView == self.hongbaoView) {
+        if (opened) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self.detector startProcess];
+        }
+    }
+}
+
+- (void)btnViewTouchDown:(UIButton *)button {
+    self.imageSee.hidden = NO;
+}
+
+- (void)btnViewTouchUp:(UIButton *)button {
+    self.imageSee.hidden = YES;
 }
 
 #pragma mark - Property
@@ -84,10 +115,32 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
-        _imageView.contentMode = UIViewContentModeCenter;
+        _imageView.contentMode = UIViewContentModeScaleToFill;
         [self.view addSubview:_imageView];
     }
     return _imageView;
+}
+
+- (UIImageView *)imageSee {
+    if (!_imageSee) {
+        _imageSee = [UIImageView new];
+        _imageSee.contentMode = UIViewContentModeScaleToFill;
+        _imageSee.transform = CGAffineTransformMakeRotation(M_PI / 2.f);
+        _imageSee.hidden = YES;
+        [self.view addSubview:_imageSee];
+    }
+    return _imageSee;
+}
+
+- (UIButton *)btnView {
+    if (!_btnView) {
+        _btnView = [[UIButton alloc] initWithFrame:CGRectZero];
+        [_btnView setTitle:@"看一下" forState:UIControlStateNormal];
+        [_btnView addTarget:self action:@selector(btnViewTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [_btnView addTarget:self action:@selector(btnViewTouchUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+        [self.view addSubview:_btnView];
+    }
+    return _btnView;
 }
 
 - (void)setModel:(AZZHongBaoModel *)model {
@@ -101,6 +154,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.view class];
                     self.imgPattern = image;
+                    self.imageSee.image = image;
                     [self.detector setPatterns:@[image]];
                     [self.detector startProcess];
                     [self hideHudAfterDelay:0];
