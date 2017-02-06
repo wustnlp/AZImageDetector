@@ -112,7 +112,7 @@
         self.hud.label.text = msg;
         self.hud.detailsLabel.text = error.localizedDescription;
         [self.hud showAnimated:YES];
-        [self.hud hideAnimated:YES afterDelay:3.f];
+        [self.hud hideAnimated:YES afterDelay:10.f];
     }];
 }
 

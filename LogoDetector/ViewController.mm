@@ -85,17 +85,17 @@
 - (IBAction)btnSendHongBao:(id)sender {
     if (!self.imgViewResult.image) {
         [self showHudWithTitle:@"Error" detail:@"图片为空"];
-        [self hideHudAfterDelay:2.f];
+        [self hideHudAfterDelay:3.f];
         return;
     }
     if ([self.tfCost.text floatValue] == 0.0) {
         [self showHudWithTitle:@"Error" detail:@"金额有误"];
-        [self hideHudAfterDelay:2.f];
+        [self hideHudAfterDelay:3.f];
         return;
     }
     if ([self.tfAmount.text integerValue] == 0) {
         [self showHudWithTitle:@"Error" detail:@"人数有误"];
-        [self hideHudAfterDelay:2.f];
+        [self hideHudAfterDelay:3.f];
         return;
     }
     
@@ -114,7 +114,7 @@
             });
         } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
             [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription]];
-            [self hideHudAfterDelay:3.f];
+            [self hideHudAfterDelay:10.f];
         }];
     }];
 }

@@ -38,7 +38,7 @@
         [self showHudWithTitle:nil detail:msg];
         [self login];
     } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
-        [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription] hideAfterDelay:3.f];
+        [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription] hideAfterDelay:10.f];
     }];
 }
 
@@ -49,7 +49,7 @@
         UIViewController *vc = [st instantiateViewControllerWithIdentifier:@"selectvc"];
         [self.navigationController pushViewController:vc animated:YES];
     } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
-        [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription] hideAfterDelay:3.f];
+        [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription] hideAfterDelay:10.f];
     }];
 }
 

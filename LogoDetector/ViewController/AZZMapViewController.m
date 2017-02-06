@@ -73,7 +73,7 @@
         if (error) {
             [reason appendFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription];
         }
-        [self showHudWithTitle:@"Error" detail:[reason copy] hideAfterDelay:3.f];
+        [self showHudWithTitle:@"Error" detail:[reason copy] hideAfterDelay:10.f];
     }];
 }
 
