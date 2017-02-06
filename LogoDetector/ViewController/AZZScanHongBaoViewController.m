@@ -14,7 +14,7 @@
 #import "AZZImageDetector.h"
 
 #import <Masonry/Masonry.h>
-#import <SDWebImage/SDWebImageDownloader.h>
+#import <SDWebImage/SDWebImageManager.h>
 
 @interface AZZScanHongBaoViewController () <AZZHongBaoViewDelegate>
 
@@ -38,7 +38,7 @@
     // Do any additional setup after loading the view.
     
     [self setupConstraints];
-    [self showHudWithTitle:nil detail:nil];
+    [self showHudWithTitle:@"请稍等" detail:@"正在下载图片"];
     
     __weak typeof(self) wself = self;
     self.detector.successBlock = ^(int index) {
@@ -147,9 +147,9 @@
     _model = model;
     if (model) {
         NSString *urlString = [[[AZZServerAddress stringByAppendingPathComponent:@"upload"] stringByAppendingPathComponent:model.idString] stringByAppendingPathExtension:@"png"];
-        self.downloadOperation = [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageDownloaderHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        self.downloadOperation = [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageRetryFailed | SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             
-        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             if (finished && image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.view class];
@@ -159,6 +159,8 @@
                     [self.detector startProcess];
                     [self hideHudAfterDelay:0];
                 });
+            } else {
+                [self showHudWithTitle:@"图片下载失败" detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription]];
             }
         }];
     }

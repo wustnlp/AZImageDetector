@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - IQKeyboardManager (4.0.8)
   - JZLocationConverter (1.0.0)
   - Mantle (2.1.0):
     - Mantle/extobjc (= 2.1.0)
@@ -26,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - IQKeyboardManager (~> 4.0.8)
   - JZLocationConverter
   - Mantle
   - Masonry
@@ -34,12 +36,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
   JZLocationConverter: 3d816bee6484aed9c155a6045a02ce444833e2f0
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 06c6daa5ca9fb59ee600b065b12b3a0061002cf0
+PODFILE CHECKSUM: 262f98f7fca2a7414cc85b0d160483c7915ef6e4
 
 COCOAPODS: 1.2.0.beta.1

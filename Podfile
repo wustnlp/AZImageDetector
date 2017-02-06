@@ -12,5 +12,6 @@ target 'LogoDetector' do
   pod 'SDWebImage'
   pod 'MBProgressHUD'
   pod 'JZLocationConverter'
+  pod 'IQKeyboardManager', '~> 4.0.8'
 
 end

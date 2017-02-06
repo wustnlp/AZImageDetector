@@ -105,7 +105,7 @@
     self.hud.detailsLabel.text = nil;
     [self.hud showAnimated:YES];
     [AZZClientInstance requestGetHongWithUUID:self.hongbaoModel.idString BaoSuccess:^(NSString * _Nullable msg, id  _Nullable obj) {
-        self.lbHongBao.text = [NSString stringWithFormat:@"msg:%@ cost:%@", msg, obj];
+        self.lbHongBao.text = [NSString stringWithFormat:@"还有%@个红包", @(self.hongbaoModel.remainAmount - 1)];
         [self openSuccess];
     } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
         self.hud.mode = MBProgressHUDModeText;

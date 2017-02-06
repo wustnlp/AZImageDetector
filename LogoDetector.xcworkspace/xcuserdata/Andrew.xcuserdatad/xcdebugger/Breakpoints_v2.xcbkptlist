@@ -19,61 +19,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LogoDetector/ViewController/AZZMapViewController.m"
-            timestampString = "506501981.077425"
+            filePath = "LogoDetector/Network/AZZClient.m"
+            timestampString = "508054717.899559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-locationUpdate:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AZZMapViewController locationUpdate:]"
-                  moduleName = "LogoDetector"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Andrew/Documents/Projects/LogoDetector/LogoDetector/ViewController/AZZMapViewController.m"
-                  timestampString = "506501981.309023"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "560">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[AZZMapViewController locationUpdate:]_block_invoke"
-                  moduleName = "LogoDetector"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Andrew/Documents/Projects/LogoDetector/LogoDetector/ViewController/AZZMapViewController.m"
-                  timestampString = "506501981.310791"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "92">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LogoDetector/ViewController/AZZMapViewController.m"
-            timestampString = "506501991.690093"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "-locationUpdate:"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-requestRegisterWithUsername:password:success:fail:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -81,31 +33,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LogoDetector/ViewController/AZZMapViewController.m"
-            timestampString = "506501995.368462"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-locationUpdate:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LogoDetector/Network/AZZClient.m"
-            timestampString = "506588952.830512"
+            timestampString = "508054719.260553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-requestGetHongWithUUID:BaoSuccess:fail:"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "-requestRegisterWithUsername:password:success:fail:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

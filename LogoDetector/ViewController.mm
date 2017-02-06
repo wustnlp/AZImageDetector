@@ -107,10 +107,13 @@
         NSString *amout = self.tfAmount.text;
         NSData *imageData = UIImagePNGRepresentation(self.imgViewResult.image);
         [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
-            [self showHudWithTitle:@"成功" detail:msg];
+            [self showHudWithTitle:nil detail:msg];
             [self hideHudAfterDelay:3.f];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
-            [self showHudWithTitle:msg detail:error.localizedDescription];
+            [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription]];
             [self hideHudAfterDelay:3.f];
         }];
     }];

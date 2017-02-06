@@ -212,6 +212,46 @@
     }];
 }
 
+- (nullable NSURLSessionDataTask *)requestRegisterWithUsername:(nonnull NSString *)userName
+                                                      password:(nonnull NSString *)password
+                                                       success:(nullable void (^)(NSString * _Nullable msg, id _Nullable userid))success
+                                                          fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail {
+    NSDictionary *param = @{
+                            @"username" : userName,
+                            @"password" : password,
+                            };
+    return [self requestWithURL:@"register.do" method:@"POST" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+        NSString *msg = nil;
+        BOOL boolSuccess = NO;
+        NSInteger obj = 0;
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            msg = [responseObject objectForKey:@"msg"];
+            obj = [[responseObject objectForKey:@"obj"] integerValue];
+            self.userid = @(obj);
+            boolSuccess = [[responseObject objectForKey:@"success"] boolValue];
+        }
+        if (boolSuccess) {
+            if (success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(msg, @(obj));
+                });
+            }
+        } else {
+            if (fail) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    fail(msg, nil);
+                });
+            }
+        }
+    } fail:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (fail) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                fail(nil, error);
+            });
+        }
+    }];
+}
+
 - (nullable NSURLSessionDataTask *)requestLoginWithUsername:(NSString *)userName
                                                    password:(NSString *)password
                                                     success:(nullable void (^)(NSString * _Nullable msg, id _Nullable userid))success

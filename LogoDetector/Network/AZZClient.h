@@ -20,6 +20,11 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
 
 + (nonnull AZZClient *)sharedInstance;
 
+- (nullable NSURLSessionDataTask *)requestRegisterWithUsername:(nonnull NSString *)userName
+                                                      password:(nonnull NSString *)password
+                                                       success:(nullable void (^)(NSString * _Nullable msg, id _Nullable userid))success
+                                                          fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
+
 - (nullable NSURLSessionDataTask *)requestLoginWithUsername:(nonnull NSString *)userName
                                                    password:(nonnull NSString *)password
                                                     success:(nullable void (^)(NSString * _Nullable msg, id _Nullable userid))success

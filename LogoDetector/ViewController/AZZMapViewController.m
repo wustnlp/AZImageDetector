@@ -32,6 +32,10 @@
     // Do any additional setup after loading the view.
     
     [self setupConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [AZZLocationManagerInstance getCurrentGCJCoordinateWithBlock:^(CLLocationCoordinate2D location) {
         [self locationUpdate:location];
@@ -67,7 +71,7 @@
             }
         }
         if (error) {
-            [reason appendFormat:@"Error: %@", error.localizedDescription];
+            [reason appendFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription];
         }
         [self showHudWithTitle:@"Error" detail:[reason copy] hideAfterDelay:3.f];
     }];
