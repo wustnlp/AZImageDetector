@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2I6-4U-XmP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wbp-ga-8u5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,10 +24,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="qL0-KB-9KH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF7-Qo-AjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1262" y="-593"/>
+            <point key="canvasLocation" x="-759" y="-619"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L4U-z4-F9C">
@@ -38,12 +39,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Tfv-jF-LaC" kind="relationship" relationship="rootViewController" id="QnN-7R-npG"/>
+                        <segue destination="2I6-4U-XmP" kind="relationship" relationship="rootViewController" id="FIH-kG-tsA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLx-aS-NEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1138" y="-3"/>
+            <point key="canvasLocation" x="-1540" y="-208"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="iYc-Ph-ROP">

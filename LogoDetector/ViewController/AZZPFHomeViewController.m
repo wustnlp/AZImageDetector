@@ -8,6 +8,7 @@
 
 #import "AZZPFHomeViewController.h"
 #import "AZZCenterTitleButton.h"
+#import "AZZUserCenterViewController.h"
 
 #import <Masonry/Masonry.h>
 
@@ -33,6 +34,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if (self.navigationController) {
+        self.navigationController.navigationBarHidden = YES;
+    }
     [self setupSubviews];
 }
 
@@ -43,6 +47,13 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+#pragma mark - Actions
+
+- (void)userCenterClicked:(id)sender {
+    AZZUserCenterViewController *vc = [AZZUserCenterViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 
@@ -109,6 +120,7 @@
     if (!_btnUser) {
         _btnUser = [[UIButton alloc] initWithFrame:CGRectZero];
         [_btnUser setImage:[UIImage imageNamed:@"u36"] forState:UIControlStateNormal];
+        [_btnUser addTarget:self action:@selector(userCenterClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnUser];
     }
     return _btnUser;

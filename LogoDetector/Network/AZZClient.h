@@ -18,6 +18,8 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
 
 @interface AZZClient : AFHTTPSessionManager
 
+@property (nonatomic, strong, readonly) NSString * _Nullable userName;
+
 + (nonnull AZZClient *)sharedInstance;
 
 - (nullable NSURLSessionDataTask *)requestRegisterWithUsername:(nonnull NSString *)userName
