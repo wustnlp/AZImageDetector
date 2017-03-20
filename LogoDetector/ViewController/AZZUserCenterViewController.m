@@ -118,6 +118,9 @@
         _lbUserName = [[UILabel alloc] initWithFrame:CGRectZero];
         _lbUserName.textAlignment = NSTextAlignmentCenter;
         _lbUserName.text = AZZClientInstance.userName;
+        if (_lbUserName.text.length == 0) {
+            _lbUserName.text = @"账户名";
+        }
         _lbUserName.textColor = [UIColor yellowColor];
         [self.header addSubview:_lbUserName];
     }

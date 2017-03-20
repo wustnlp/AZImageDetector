@@ -9,6 +9,7 @@
 #import "AZZPFHomeViewController.h"
 #import "AZZCenterTitleButton.h"
 #import "AZZUserCenterViewController.h"
+#import "AZZGotHongBaoViewController.h"
 
 #import <Masonry/Masonry.h>
 
@@ -54,6 +55,54 @@
 - (void)userCenterClicked:(id)sender {
     AZZUserCenterViewController *vc = [AZZUserCenterViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)oneClicked:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您将消耗1个红包开启大红包哦！" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+        vc.hbValue = @"10Mb";
+        vc.hbType = @"流量";
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:cancel];
+    [alertController addAction:done];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)eightClicked:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您将消耗8个红包开启大红包哦！" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+        vc.hbValue = @"100Mb";
+        vc.hbType = @"流量";
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:cancel];
+    [alertController addAction:done];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)twentyClicked:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"您将消耗20个红包开启大红包哦！" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+        vc.hbValue = @"1.8元";
+        vc.hbType = @"现金";
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:cancel];
+    [alertController addAction:done];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - 
@@ -145,6 +194,7 @@
         _btnOne.lbTitle.text = @"壹";
         _btnOne.lbTitle.textColor = [UIColor yellowColor];
         _btnOne.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnOne addTarget:self action:@selector(oneClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnOne];
     }
     return _btnOne;
@@ -157,6 +207,7 @@
         _btnTwenty.lbTitle.text = @"贰拾";
         _btnTwenty.lbTitle.textColor = [UIColor yellowColor];
         _btnTwenty.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnTwenty addTarget:self action:@selector(twentyClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnTwenty];
     }
     return _btnTwenty;
@@ -169,6 +220,7 @@
         _btnEight.lbTitle.text = @"捌";
         _btnEight.lbTitle.textColor = [UIColor yellowColor];
         _btnEight.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnEight addTarget:self action:@selector(eightClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnEight];
     }
     return _btnEight;
