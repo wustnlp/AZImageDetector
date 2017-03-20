@@ -33,6 +33,8 @@
 		4962C7651E45C61F0002A397 /* AZZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4962C7641E45C61F0002A397 /* AZZLoginViewController.m */; };
 		4962C7681E45CD780002A397 /* AZZRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4962C7671E45CD780002A397 /* AZZRegisterViewController.m */; };
 		4962C76B1E484DD20002A397 /* AZZSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4962C76A1E484DD20002A397 /* AZZSelectViewController.m */; };
+		499416D31E7B83D90043E0D7 /* AZZPFHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499416D21E7B83D90043E0D7 /* AZZPFHomeViewController.m */; };
+		499416D61E7B85C40043E0D7 /* AZZCenterTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 499416D51E7B85C40043E0D7 /* AZZCenterTitleButton.m */; };
 		BF79371D60E40897DF21929E /* libPods-LogoDetector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +86,10 @@
 		4962C7671E45CD780002A397 /* AZZRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZRegisterViewController.m; path = ViewController/AZZRegisterViewController.m; sourceTree = "<group>"; };
 		4962C7691E484DD20002A397 /* AZZSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZSelectViewController.h; path = ViewController/AZZSelectViewController.h; sourceTree = "<group>"; };
 		4962C76A1E484DD20002A397 /* AZZSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZSelectViewController.m; path = ViewController/AZZSelectViewController.m; sourceTree = "<group>"; };
+		499416D11E7B83D90043E0D7 /* AZZPFHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZPFHomeViewController.h; path = ViewController/AZZPFHomeViewController.h; sourceTree = "<group>"; };
+		499416D21E7B83D90043E0D7 /* AZZPFHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZPFHomeViewController.m; path = ViewController/AZZPFHomeViewController.m; sourceTree = "<group>"; };
+		499416D41E7B85C40043E0D7 /* AZZCenterTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZCenterTitleButton.h; path = View/AZZCenterTitleButton.h; sourceTree = "<group>"; };
+		499416D51E7B85C40043E0D7 /* AZZCenterTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZCenterTitleButton.m; path = View/AZZCenterTitleButton.m; sourceTree = "<group>"; };
 		78AB7F00BFEFC728D9B25F30 /* Pods-LogoDetector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.debug.xcconfig"; sourceTree = "<group>"; };
 		7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogoDetector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F8311D55F40B38B9A90FBD /* Pods-LogoDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +151,8 @@
 				4924C65D1E28B00A00EFDCDE /* AZZScanHongBaoViewController.m */,
 				4962C7691E484DD20002A397 /* AZZSelectViewController.h */,
 				4962C76A1E484DD20002A397 /* AZZSelectViewController.m */,
+				499416D11E7B83D90043E0D7 /* AZZPFHomeViewController.h */,
+				499416D21E7B83D90043E0D7 /* AZZPFHomeViewController.m */,
 			);
 			name = ViewControoler;
 			sourceTree = "<group>";
@@ -154,6 +162,8 @@
 			children = (
 				49150C8A1E308B0300638614 /* AZZHongBaoView.h */,
 				49150C8B1E308B0300638614 /* AZZHongBaoView.m */,
+				499416D41E7B85C40043E0D7 /* AZZCenterTitleButton.h */,
+				499416D51E7B85C40043E0D7 /* AZZCenterTitleButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -373,6 +383,7 @@
 				4951F7FA1E1F3BA1005BE3E8 /* ViewController.mm in Sources */,
 				4924C6591E28A31800EFDCDE /* AZZBaseViewController.m in Sources */,
 				49150C8C1E308B0300638614 /* AZZHongBaoView.m in Sources */,
+				499416D31E7B83D90043E0D7 /* AZZPFHomeViewController.m in Sources */,
 				4951F7F71E1F3BA1005BE3E8 /* AppDelegate.m in Sources */,
 				4924C6401E289BC100EFDCDE /* AZZClient.m in Sources */,
 				4924C64C1E289BE300EFDCDE /* AZZImageUtils.mm in Sources */,
@@ -383,6 +394,7 @@
 				4962C7651E45C61F0002A397 /* AZZLoginViewController.m in Sources */,
 				4924C6431E289BCE00EFDCDE /* AZZHongBaoModel.m in Sources */,
 				4962C7681E45CD780002A397 /* AZZRegisterViewController.m in Sources */,
+				499416D61E7B85C40043E0D7 /* AZZCenterTitleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
