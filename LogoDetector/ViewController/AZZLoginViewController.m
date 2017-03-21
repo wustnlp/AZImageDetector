@@ -43,9 +43,7 @@
     [self showHudWithTitle:nil detail:nil];
     [AZZClientInstance requestLoginWithUsername:self.tfUsername.text password:self.tfPassword.text success:^(NSString * _Nullable msg, id  _Nullable userid) {
         [self showHudWithTitle:nil detail:msg];
-        UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *vc = [st instantiateViewControllerWithIdentifier:@"selectvc"];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
         [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription] hideAfterDelay:10.f];
     }];

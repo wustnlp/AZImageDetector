@@ -10,6 +10,7 @@
 #import "AZZCenterTitleButton.h"
 #import "AZZUserCenterViewController.h"
 #import "AZZGotHongBaoViewController.h"
+#import "AZZClient.h"
 
 #import <Masonry/Masonry.h>
 
@@ -35,10 +36,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (self.navigationController) {
-        self.navigationController.navigationBarHidden = YES;
-    }
     [self setupSubviews];
+    
+    if (AZZClientInstance.userName.length == 0) {
+        UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [st instantiateViewControllerWithIdentifier:@"loginVC"];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:nvc animated:YES completion:nil];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

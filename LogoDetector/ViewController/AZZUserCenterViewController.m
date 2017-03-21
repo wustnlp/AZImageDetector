@@ -35,11 +35,22 @@
     // Do any additional setup after loading the view.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationController.navigationBarHidden = YES;
     
     self.view.backgroundColor = [UIColor colorWithRed:242.f / 255.f green:242.f / 255.f blue:242.f / 255.f alpha:1];
     
     [self setupSubviews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +101,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 1) {
+        UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [st instantiateViewControllerWithIdentifier:@"selectvc"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - 

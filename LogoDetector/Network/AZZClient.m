@@ -270,6 +270,7 @@
             msg = [responseObject objectForKey:@"msg"];
             obj = [[responseObject objectForKey:@"obj"] integerValue];
             self.userid = @(obj);
+            self.userName = userName;
             boolSuccess = [[responseObject objectForKey:@"success"] boolValue];
         }
         if (boolSuccess) {
