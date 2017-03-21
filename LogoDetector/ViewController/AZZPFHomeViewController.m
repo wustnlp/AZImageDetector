@@ -134,8 +134,8 @@
         make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
     [self.btnSend mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).with.offset(-15);
-        make.centerY.equalTo(self.btnUser);
+        make.right.equalTo(self.view).with.offset(-30);
+        make.top.equalTo(self.btnUser);
         make.size.mas_equalTo(CGSizeMake(88, 88));
     }];
     [self.btnOne mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -207,10 +207,10 @@
 - (AZZCenterTitleButton *)btnOne {
     if (!_btnOne) {
         _btnOne = [[AZZCenterTitleButton alloc] initWithFrame:CGRectZero];
-        [_btnOne.imgBackground setImage:[UIImage imageNamed:@"u4"]];
-        _btnOne.lbTitle.text = @"壹";
-        _btnOne.lbTitle.textColor = [UIColor yellowColor];
-        _btnOne.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnOne.imgBackground setImage:[UIImage imageNamed:@"u61-1"]];
+//        _btnOne.lbTitle.text = @"壹";
+//        _btnOne.lbTitle.textColor = [UIColor yellowColor];
+//        _btnOne.lbTitle.font = [UIFont systemFontOfSize:46.f];
         [_btnOne addTarget:self action:@selector(oneClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnOne];
     }
@@ -220,10 +220,10 @@
 - (AZZCenterTitleButton *)btnTwenty {
     if (!_btnTwenty) {
         _btnTwenty = [[AZZCenterTitleButton alloc] initWithFrame:CGRectZero];
-        [_btnTwenty.imgBackground setImage:[UIImage imageNamed:@"u4"]];
-        _btnTwenty.lbTitle.text = @"贰拾";
-        _btnTwenty.lbTitle.textColor = [UIColor yellowColor];
-        _btnTwenty.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnTwenty.imgBackground setImage:[UIImage imageNamed:@"u63"]];
+//        _btnTwenty.lbTitle.text = @"贰拾";
+//        _btnTwenty.lbTitle.textColor = [UIColor yellowColor];
+//        _btnTwenty.lbTitle.font = [UIFont systemFontOfSize:46.f];
         [_btnTwenty addTarget:self action:@selector(twentyClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnTwenty];
     }
@@ -233,10 +233,10 @@
 - (AZZCenterTitleButton *)btnEight {
     if (!_btnEight) {
         _btnEight = [[AZZCenterTitleButton alloc] initWithFrame:CGRectZero];
-        [_btnEight.imgBackground setImage:[UIImage imageNamed:@"u4"]];
-        _btnEight.lbTitle.text = @"捌";
-        _btnEight.lbTitle.textColor = [UIColor yellowColor];
-        _btnEight.lbTitle.font = [UIFont systemFontOfSize:46.f];
+        [_btnEight.imgBackground setImage:[UIImage imageNamed:@"u59-1"]];
+//        _btnEight.lbTitle.text = @"捌";
+//        _btnEight.lbTitle.textColor = [UIColor yellowColor];
+//        _btnEight.lbTitle.font = [UIFont systemFontOfSize:46.f];
         [_btnEight addTarget:self action:@selector(eightClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_btnEight];
     }
