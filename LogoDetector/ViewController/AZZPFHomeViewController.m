@@ -28,6 +28,8 @@
 @property (nonatomic, strong) UIView *vOne;
 @property (nonatomic, strong) UIView *vTwo;
 
+@property (nonatomic, assign) NSInteger amount;
+
 @end
 
 @implementation AZZPFHomeViewController
@@ -50,6 +52,15 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    
+    [self showHudWithTitle:nil detail:nil];
+    [AZZClientInstance requestGetAmountSuccess:^(NSInteger result) {
+        [self hideHudAfterDelay:0];
+        self.amount = result;
+        self.lbLineTwo.attributedText = self.lineTwoString;
+    } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+        [self showHudWithTitle:msg detail:error.localizedDescription hideAfterDelay:5.f];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -80,10 +91,16 @@
         
     }];
     UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
-        vc.hbValue = @"10Mb";
-        vc.hbType = @"流量";
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showHudWithTitle:nil detail:nil];
+        [AZZClientInstance requestUseHongbaoWithAmount:1 success:^(NSString * _Nonnull type, NSString * _Nonnull value) {
+            [self hideHudAfterDelay:0];
+            AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+            vc.hbValue = value;
+            vc.hbType = type;
+            [self.navigationController pushViewController:vc animated:YES];
+        } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+            [self showHudWithTitle:msg detail:error.localizedDescription hideAfterDelay:5.f];
+        }];
     }];
     [alertController addAction:cancel];
     [alertController addAction:done];
@@ -96,10 +113,16 @@
         
     }];
     UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
-        vc.hbValue = @"100Mb";
-        vc.hbType = @"流量";
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showHudWithTitle:nil detail:nil];
+        [AZZClientInstance requestUseHongbaoWithAmount:8 success:^(NSString * _Nonnull type, NSString * _Nonnull value) {
+            [self hideHudAfterDelay:0];
+            AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+            vc.hbValue = value;
+            vc.hbType = type;
+            [self.navigationController pushViewController:vc animated:YES];
+        } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+            [self showHudWithTitle:msg detail:error.localizedDescription hideAfterDelay:5.f];
+        }];
     }];
     [alertController addAction:cancel];
     [alertController addAction:done];
@@ -112,10 +135,16 @@
         
     }];
     UIAlertAction *done = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
-        vc.hbValue = @"1.8元";
-        vc.hbType = @"现金";
-        [self.navigationController pushViewController:vc animated:YES];
+        [self showHudWithTitle:nil detail:nil];
+        [AZZClientInstance requestUseHongbaoWithAmount:20 success:^(NSString * _Nonnull type, NSString * _Nonnull value) {
+            [self hideHudAfterDelay:0];
+            AZZGotHongBaoViewController *vc = [AZZGotHongBaoViewController new];
+            vc.hbValue = value;
+            vc.hbType = type;
+            [self.navigationController pushViewController:vc animated:YES];
+        } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+            [self showHudWithTitle:msg detail:error.localizedDescription hideAfterDelay:5.f];
+        }];
     }];
     [alertController addAction:cancel];
     [alertController addAction:done];
@@ -278,17 +307,21 @@
         _lbLineTwo = [[UILabel alloc] initWithFrame:CGRectZero];
         _lbLineTwo.numberOfLines = 0;
         _lbLineTwo.font = [UIFont systemFontOfSize:14.f];
-        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"您目前有X个红包！"];
-        NSRange range = [attrString.string rangeOfString:@"X"];
-        NSString *number = @"X"; //TODO
-        range.length = number.length;
-        [attrString replaceCharactersInRange:range withString:number];
-        [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor yellowColor] range:range];
-        _lbLineTwo.attributedText = attrString.copy;
+        _lbLineTwo.attributedText = self.lineTwoString;
         _lbLineTwo.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:_lbLineTwo];
     }
     return _lbLineTwo;
+}
+
+- (NSAttributedString *)lineTwoString {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"您目前有X个红包！"];
+    NSRange range = [attrString.string rangeOfString:@"X"];
+    NSString *number = [@(self.amount) stringValue];
+    range.length = number.length;
+    [attrString replaceCharactersInRange:range withString:number];
+    [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor yellowColor] range:range];
+    return attrString.copy;
 }
 
 @end

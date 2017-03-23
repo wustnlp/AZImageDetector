@@ -9,6 +9,6 @@
 #ifndef AZZServerResources_h
 #define AZZServerResources_h
 
-#define AZZServerAddress @"http://172.16.2.206:8080/luan"
+#define AZZServerAddress @"http://172.16.2.206:8080"
 
 #endif /* AZZServerResources_h */

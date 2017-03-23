@@ -53,4 +53,11 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
                                                            success:(nullable void (^)(NSArray<AZZHongBaoGotUserModel *> * _Nullable users))success
                                                               fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
 
+- (nullable NSURLSessionDataTask *)requestGetAmountSuccess:(nullable void (^)(NSInteger result))success
+                                                      fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
+
+- (nullable NSURLSessionDataTask *)requestUseHongbaoWithAmount:(NSInteger)amount
+                                                       success:(nullable void (^)(NSString * _Nonnull type, NSString * _Nonnull value))success
+                                                          fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail;
+
 @end

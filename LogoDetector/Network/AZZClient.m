@@ -28,7 +28,7 @@
         instance.postSerializer = [AFJSONRequestSerializer serializer];
         instance.requestSerializer = [AFHTTPRequestSerializer serializer];
         instance.responseSerializer = [AFJSONResponseSerializer serializer];
-        instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", nil];
+        instance.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"application/json", nil];
         instance.postSerializer.timeoutInterval = 30;
         instance.requestSerializer.timeoutInterval = 15;
     });
@@ -95,7 +95,7 @@
                             @"longitude" : longitude,
                             };
     NSError *error = nil;
-    NSURLRequest *request = [self.postSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSURL URLWithString:@"upload.do" relativeToURL:self.baseURL].absoluteString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSURLRequest *request = [self.postSerializer multipartFormRequestWithMethod:@"POST" URLString:[NSURL URLWithString:@"luan/upload.do" relativeToURL:self.baseURL].absoluteString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:image name:@"file" fileName:@"image.png" mimeType:@"image/png"];
     } error:&error];
     
@@ -146,7 +146,7 @@
                             @"latitude"  : latitude,
                             @"userid"    : userid,
                             };
-    return [self requestWithURL:@"getRelated.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+    return [self requestWithURL:@"luan/getRelated.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
             NSString *msg = [responseObject objectForKey:@"msg"];
             NSNumber *boolNum = [responseObject objectForKey:@"success"];
             if (boolNum && ![boolNum boolValue] && fail) {
@@ -182,7 +182,7 @@
                             @"id" : uuid,
                             @"userid" : userid,
                             };
-    return [self requestWithURL:@"getHongbao.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+    return [self requestWithURL:@"luan/getHongbao.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
         NSString *msg = nil;
         BOOL boolSuccess = NO;
         id obj = nil;
@@ -221,7 +221,7 @@
                             @"username" : userName,
                             @"password" : password,
                             };
-    return [self requestWithURL:@"register.do" method:@"POST" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+    return [self requestWithURL:@"luan/register.do" method:@"POST" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
         NSString *msg = nil;
         BOOL boolSuccess = NO;
         NSInteger obj = 0;
@@ -262,7 +262,7 @@
                             @"username" : userName,
                             @"password" : password,
                             };
-    return [self requestWithURL:@"login.do" method:@"POST" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+    return [self requestWithURL:@"luan/login.do" method:@"POST" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
         NSString *msg = nil;
         BOOL boolSuccess = NO;
         NSInteger obj = 0;
@@ -301,7 +301,7 @@
     NSDictionary *param = @{
                             @"id" : hongbaoId,
                             };
-    return [self requestWithURL:@"getGotUsers.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+    return [self requestWithURL:@"luan/getGotUsers.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
         NSInteger total = [[responseObject objectForKey:@"total"] integerValue];
         if (total > 0) {
             NSArray *jsonArr = [responseObject objectForKey:@"rows"];
@@ -318,6 +318,76 @@
                 });
             }
         }
+    } fail:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (fail) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                fail(nil, error);
+            });
+        }
+    }];
+}
+
+- (nullable NSURLSessionDataTask *)requestGetAmountSuccess:(nullable void (^)(NSInteger result))success
+                                                      fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail {
+    NSString *userid = @"";
+    if (self.userid) {
+        userid = [self.userid stringValue];
+    }
+    NSDictionary *param = @{
+                            @"userid"    : userid,
+                            };
+    return [self requestWithURL:@"hongbaoPlus/getAmount.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            NSNumber *boolNum = [responseObject objectForKey:@"success"];
+            if (boolNum && ![boolNum boolValue] && fail) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    fail(msg, nil);
+                });
+            } else {
+                if (success) {
+                    id idresult = [responseObject objectForKey:@"result"];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success([idresult integerValue]);
+                    });
+                }
+            }
+    } fail:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (fail) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                fail(nil, error);
+            });
+        }
+    }];
+}
+
+- (nullable NSURLSessionDataTask *)requestUseHongbaoWithAmount:(NSInteger)amount
+                                                       success:(nullable void (^)(NSString * _Nonnull type, NSString * _Nonnull value))success
+                                                          fail:(nullable void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail {
+    NSString *userid = @"";
+    if (self.userid) {
+        userid = [self.userid stringValue];
+    }
+    NSDictionary *param = @{
+                            @"amount"    : [@(amount) stringValue],
+                            @"userid"    : userid,
+                            };
+    return [self requestWithURL:@"hongbaoPlus/useHongBao.do" method:@"GET" parameters:param success:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject) {
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            NSNumber *boolNum = [responseObject objectForKey:@"success"];
+            if (boolNum && ![boolNum boolValue] && fail) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    fail(msg, nil);
+                });
+            } else {
+                if (success) {
+                    NSDictionary *idresult = [responseObject objectForKey:@"result"];
+                    NSString *value = [idresult objectForKey:@"value"];
+                    NSString *type = [idresult objectForKey:@"type"];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(type, value);
+                    });
+                }
+            }
     } fail:^(NSHTTPURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (fail) {
             dispatch_async(dispatch_get_main_queue(), ^{

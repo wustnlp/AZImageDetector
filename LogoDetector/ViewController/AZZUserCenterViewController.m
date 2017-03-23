@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSArray<NSString *> *aryDetails;
 @property (nonatomic, strong) NSArray<UIImage *> *aryImages;
 
+@property (nonatomic, assign) NSInteger amount;
+
 @end
 
 @implementation AZZUserCenterViewController
@@ -36,7 +38,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.view.backgroundColor = [UIColor colorWithRed:242.f / 255.f green:242.f / 255.f blue:242.f / 255.f alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:249.f / 255.f green:249.f / 255.f blue:249.f / 255.f alpha:1];
     
     [self setupSubviews];
 }
@@ -45,6 +47,14 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    [self showHudWithTitle:nil detail:nil];
+    [AZZClientInstance requestGetAmountSuccess:^(NSInteger result) {
+        [self hideHudAfterDelay:0];
+        self.amount = result;
+        [self.tbActions reloadData];
+    } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
+        [self showHudWithTitle:msg detail:error.localizedDescription hideAfterDelay:5.f];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -176,10 +186,7 @@
 }
 
 - (NSArray<NSString *> *)aryDetails {
-    if (!_aryDetails) {
-        _aryDetails = @[@"*个", @"", @""];
-    }
-    return _aryDetails;
+    return @[[NSString stringWithFormat:@"%@个", @(self.amount)], @"", @""];
 }
 
 - (NSArray<UIImage *> *)aryImages {
