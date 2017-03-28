@@ -11,13 +11,30 @@
 #import "AZZImageUtils.h"
 #import "AZZClient.h"
 #import "AZZLocationManager.h"
+#import "UMSSpinnerView.h"
 
 @interface ViewController () <CvPhotoCameraDelegate, UITextFieldDelegate>
 
+@property (nonatomic, weak) IBOutlet UIView *vInputs;
+@property (nonatomic, weak) IBOutlet UIView *vLeft;
+@property (nonatomic, weak) IBOutlet UIView *vRight;
+@property (nonatomic, weak) IBOutlet UIView *vTop;
+@property (nonatomic, weak) IBOutlet UIView *vBottom;
+
 @property (weak, nonatomic) IBOutlet UITextField *tfCost;
 @property (weak, nonatomic) IBOutlet UITextField *tfAmount;
+@property (nonatomic, weak) IBOutlet UITextField *tfMessage;
+
+@property (nonatomic, weak) IBOutlet UIButton *btnSendFirst;
+@property (nonatomic, weak) IBOutlet UIButton *btnSendSecond;
+@property (nonatomic, weak) IBOutlet UIButton *btnShot;
+@property (nonatomic, weak) IBOutlet UIButton *btnReshot;
+@property (nonatomic, weak) IBOutlet UIButton *btnCancel;
+
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
-@property (nonatomic, weak) IBOutlet UIImageView *imgViewResult;
+@property (nonatomic, weak) IBOutlet UMSSpinnerView *imgViewResult;
+
+@property (nonatomic, strong) UIImage *imgResult;
 
 @property (nonatomic, strong) CvPhotoCamera *camera;
 
@@ -35,6 +52,8 @@
     self.camera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.camera.defaultFPS = 30;
     self.camera.delegate = self;
+    
+    [self setupAnimatedImage];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,11 +73,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setupAnimatedImage {
+    self.imgViewResult.tintColor = [UIColor redColor];
+    self.imgViewResult.lineWidth = 2;
+    self.imgViewResult.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imgViewResult.userInteractionEnabled = NO;
+    self.imgViewResult.hidesWhenStopped = YES;
+    [self.imgViewResult startAnimating];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.tfCost) {
         [self.tfAmount becomeFirstResponder];
+    } else if (textField == self.tfAmount) {
+        [self.tfMessage becomeFirstResponder];
     } else {
-        [self.tfAmount resignFirstResponder];
+        [self.tfMessage resignFirstResponder];
     }
     return YES;
 }
@@ -67,14 +97,18 @@
     if (textField == self.tfCost) {
         NSArray *costArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0", @".", @""];
         return [costArray containsObject:string];
-    } else{
+    } else if (textField == self.tfAmount) {
         NSArray *amoutArray = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0", @""];
         return [amoutArray containsObject:string];
+    } else {
+        NSString *result = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return [result lengthOfBytesUsingEncoding:NSUTF8StringEncoding] <= 256;
     }
 }
 
 - (void)photoCamera:(CvPhotoCamera *)photoCamera capturedImage:(UIImage *)image {
     NSLog(@"captured");
+    [self.camera stop];
     [self dealWithImage:image];
 }
 
@@ -83,7 +117,21 @@
 }
 
 - (IBAction)btnSendHongBao:(id)sender {
-    if (!self.imgViewResult.image) {
+    self.btnSendFirst.hidden = YES;
+    self.btnReshot.hidden = YES;
+    [self showInputs:YES];
+    [self showBackground:NO];
+}
+
+- (IBAction)btnCancelClicked:(id)sender {
+    [self showInputs:NO];
+    self.btnSendFirst.hidden = NO;
+    self.btnReshot.hidden = NO;
+    [self showBackground:YES];
+}
+
+- (IBAction)btnSecondClicked:(id)sender {
+    if (!self.imgResult) {
         [self showHudWithTitle:@"Error" detail:@"图片为空"];
         [self hideHudAfterDelay:3.f];
         return;
@@ -105,7 +153,7 @@
         NSString *longi = [@(location.longitude) stringValue];
         NSString *cost = self.tfCost.text;
         NSString *amout = self.tfAmount.text;
-        NSData *imageData = UIImagePNGRepresentation(self.imgViewResult.image);
+        NSData *imageData = UIImagePNGRepresentation(self.imgResult);
         [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
             [self showHudWithTitle:nil detail:msg];
             [self hideHudAfterDelay:3.f];
@@ -121,10 +169,31 @@
 
 - (IBAction)btnTakePhoto:(id)sender {
     [self.camera takePicture];
+    self.btnShot.hidden = YES;
+    self.btnReshot.hidden = NO;
+    self.btnSendFirst.hidden = NO;
+    [self showBackground:YES];
+    [self.imgViewResult stopAnimating];
 }
 
 - (IBAction)btnReTakePhoto:(id)sender {
-    self.imgViewResult.hidden = YES;
+    [self.camera start];
+    self.btnShot.hidden = NO;
+    self.btnReshot.hidden = YES;
+    self.btnSendFirst.hidden = YES;
+    [self showBackground:NO];
+    [self.imgViewResult startAnimating];
+}
+
+- (void)showBackground:(BOOL)show {
+    self.vLeft.hidden = !show;
+    self.vRight.hidden = !show;
+    self.vTop.hidden = !show;
+    self.vBottom.hidden = !show;
+}
+
+- (void)showInputs:(BOOL)show {
+    self.vInputs.hidden = !show;
 }
 
 - (void)dealWithImage:(UIImage *)image {
@@ -150,8 +219,9 @@
         height = CGRectGetHeight(rect) * heightFactor;
     }
     UIImage *result = [AZZImageUtils croppedImage:image InRect:CGRectMake(x, y, width, height)];
-    self.imgViewResult.image = result;
-    self.imgViewResult.hidden = NO;
+//    self.imgViewResult.image = result;
+    self.imgResult = result;
+    self.imageView.image = image;
 }
 
 @end

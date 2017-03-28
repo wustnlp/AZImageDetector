@@ -146,7 +146,7 @@
 - (void)setModel:(AZZHongBaoModel *)model {
     _model = model;
     if (model) {
-        NSString *urlString = [[[AZZServerAddress stringByAppendingPathComponent:@"upload"] stringByAppendingPathComponent:model.idString] stringByAppendingPathExtension:@"png"];
+        NSString *urlString = [[[AZZServerAddress stringByAppendingPathComponent:@"luan/upload"] stringByAppendingPathComponent:model.idString] stringByAppendingPathExtension:@"png"];
         self.downloadOperation = [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:urlString] options:SDWebImageRetryFailed | SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
