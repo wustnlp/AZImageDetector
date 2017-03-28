@@ -299,23 +299,23 @@
                                 <rect key="frame" x="63" y="426.5" width="250" height="176.5"/>
                                 <color key="backgroundColor" white="1" alpha="0.4726027397260274" colorSpace="calibratedWhite"/>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckp-mf-hvc">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckp-mf-hvc" customClass="UIImageView">
                                 <rect key="frame" x="27" y="101.5" width="320" height="400"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dce-sj-jOX">
-                                        <rect key="frame" x="30" y="80" width="35" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="红包个数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dce-sj-jOX">
+                                        <rect key="frame" x="30" y="80" width="69.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-4I-2IT">
-                                        <rect key="frame" x="30" y="136" width="35" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwt-4I-2IT">
+                                        <rect key="frame" x="39" y="136" width="52" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-AB-OoS">
-                                        <rect key="frame" x="115" y="75" width="175" height="30"/>
+                                        <rect key="frame" x="149.5" y="75" width="140.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -323,23 +323,8 @@
                                             <outlet property="delegate" destination="aRC-EH-v4K" id="PUv-1f-ohI"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YfE-wz-5pz">
-                                        <rect key="frame" x="115" y="187" width="175" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="aRC-EH-v4K" id="ZOg-Bc-CRp"/>
-                                        </connections>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留言" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRj-VD-ZZ2">
-                                        <rect key="frame" x="30" y="192" width="35" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="os3-zR-afd">
-                                        <rect key="frame" x="115" y="131" width="175" height="30"/>
+                                        <rect key="frame" x="149.5" y="131.5" width="140.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -347,6 +332,21 @@
                                             <outlet property="delegate" destination="aRC-EH-v4K" id="OXQ-bX-2lF"/>
                                         </connections>
                                     </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YfE-wz-5pz">
+                                        <rect key="frame" x="149.5" y="187" width="140.5" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="aRC-EH-v4K" id="ZOg-Bc-CRp"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRj-VD-ZZ2">
+                                        <rect key="frame" x="39" y="192" width="52" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sE-CG-cVK">
                                         <rect key="frame" x="110" y="290" width="100" height="30"/>
                                         <constraints>
@@ -361,7 +361,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6b-m2-TI6">
-                                        <rect key="frame" x="282" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="260" y="30" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Beb-AQ-04S"/>
                                             <constraint firstAttribute="width" secondItem="f6b-m2-TI6" secondAttribute="height" multiplier="1:1" id="Qoq-j8-LWZ"/>
@@ -372,14 +372,14 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.61176470588235299" green="0.65490196078431373" blue="0.80000000000000004" alpha="0.49315068493150682" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Dce-sj-jOX" firstAttribute="leading" secondItem="Ckp-mf-hvc" secondAttribute="leading" constant="30" id="1wz-qo-BTf"/>
                                     <constraint firstItem="Dce-sj-jOX" firstAttribute="top" secondItem="Ckp-mf-hvc" secondAttribute="top" constant="80" id="3e4-aa-hDI"/>
                                     <constraint firstAttribute="width" constant="320" id="5Sn-B7-8pm"/>
                                     <constraint firstItem="7sE-CG-cVK" firstAttribute="centerX" secondItem="Ckp-mf-hvc" secondAttribute="centerX" id="CYV-yS-gRv"/>
                                     <constraint firstItem="Dwt-4I-2IT" firstAttribute="centerX" secondItem="Dce-sj-jOX" secondAttribute="centerX" id="Ce0-OF-el9"/>
-                                    <constraint firstAttribute="trailing" secondItem="f6b-m2-TI6" secondAttribute="trailing" constant="8" id="EiU-il-UcE"/>
+                                    <constraint firstAttribute="trailing" secondItem="f6b-m2-TI6" secondAttribute="trailing" constant="30" id="EiU-il-UcE"/>
                                     <constraint firstAttribute="trailing" secondItem="dCi-AB-OoS" secondAttribute="trailing" constant="30" id="Jgg-6L-7JT"/>
                                     <constraint firstItem="Dwt-4I-2IT" firstAttribute="top" secondItem="Dce-sj-jOX" secondAttribute="bottom" constant="35" id="Kru-B3-Vw9"/>
                                     <constraint firstItem="YfE-wz-5pz" firstAttribute="width" secondItem="os3-zR-afd" secondAttribute="width" id="LhX-p8-hJp"/>
@@ -395,7 +395,7 @@
                                     <constraint firstAttribute="bottom" secondItem="7sE-CG-cVK" secondAttribute="bottom" constant="80" id="sMG-ut-cdc"/>
                                     <constraint firstItem="os3-zR-afd" firstAttribute="centerX" secondItem="dCi-AB-OoS" secondAttribute="centerX" id="x8h-BN-pie"/>
                                     <constraint firstItem="qRj-VD-ZZ2" firstAttribute="top" secondItem="Dwt-4I-2IT" secondAttribute="bottom" constant="35" id="xrH-kC-aBC"/>
-                                    <constraint firstItem="f6b-m2-TI6" firstAttribute="top" secondItem="Ckp-mf-hvc" secondAttribute="top" constant="8" id="yGh-qP-aSp"/>
+                                    <constraint firstItem="f6b-m2-TI6" firstAttribute="top" secondItem="Ckp-mf-hvc" secondAttribute="top" constant="30" id="yGh-qP-aSp"/>
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-zp-KTM">
@@ -478,9 +478,9 @@
                         <outlet property="btnShot" destination="3z8-mK-9Bw" id="kAP-Fd-4bx"/>
                         <outlet property="imageView" destination="Sff-fO-G09" id="QFS-VS-1C4"/>
                         <outlet property="imgViewResult" destination="q5T-yL-jRk" id="AmR-43-UIS"/>
-                        <outlet property="tfAmount" destination="os3-zR-afd" id="BGK-vz-42C"/>
-                        <outlet property="tfCost" destination="dCi-AB-OoS" id="n65-rd-bhh"/>
-                        <outlet property="tfMessage" destination="YfE-wz-5pz" id="IuN-jH-lkL"/>
+                        <outlet property="tfAmount" destination="dCi-AB-OoS" id="uFC-al-YRa"/>
+                        <outlet property="tfCost" destination="os3-zR-afd" id="YpV-Ny-X65"/>
+                        <outlet property="tfMessage" destination="YfE-wz-5pz" id="GjH-tt-UUK"/>
                         <outlet property="vBottom" destination="Orx-aK-GSH" id="S7V-jY-gNR"/>
                         <outlet property="vInputs" destination="Ckp-mf-hvc" id="hu5-it-ZlR"/>
                         <outlet property="vLeft" destination="BnO-OL-Xht" id="Jkz-8E-wq8"/>

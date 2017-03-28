@@ -18,6 +18,7 @@
 @property (nonatomic, assign, readonly) NSInteger remainAmount;
 @property (nonatomic, assign, readonly) float remainCost;
 @property (nonatomic, assign, readonly) NSInteger amount;
+@property (nonatomic, copy, readonly) NSString *message;
 
 + (instancetype)hongBaoModelFromDictionary:(NSDictionary *)dic;
 + (NSArray<AZZHongBaoModel *> *)hongBaoModelsFromArray:(NSArray *)arr;

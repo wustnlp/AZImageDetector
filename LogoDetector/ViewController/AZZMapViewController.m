@@ -109,6 +109,7 @@
         frame.size = CGSizeMake(40, 40);
         annotationView.frame = frame;
         annotationView.image = [UIImage imageNamed:@"hongbao_annotation"];
+//        annotationView.canShowCallout = YES;
     }
     annotationView.draggable = NO;
     return annotationView;
@@ -122,6 +123,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"mapview did select");
     AZZMapAnnotation *annotation = view.annotation;
     if ((id)annotation == mapView.userLocation) {
         return;
@@ -130,6 +132,10 @@
     AZZScanHongBaoViewController *vc = [AZZScanHongBaoViewController new];
     vc.model = annotation.model;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    NSLog(@"mapview did deselect");
 }
 
 @end

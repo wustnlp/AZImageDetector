@@ -22,7 +22,11 @@
 
 + (AZZMapAnnotation *)annotationWithModel:(AZZHongBaoModel *)model {
     AZZMapAnnotation *instance = [[AZZMapAnnotation alloc] init];
-    instance.title = [@(model.cost) stringValue];
+    NSString *title = @"";
+    if (model.message) {
+        title = model.message;
+    }
+    instance.title = title;
     instance.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
     instance.model = model;
     return instance;

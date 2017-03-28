@@ -81,16 +81,21 @@
                                             amount:(NSString *)amount
                                           latitude:(NSString *)latitude
                                          longitude:(NSString *)longitude
+                                           message:(NSString *)message
                                            success:(void (^)(NSString * _Nullable msg))success
                                               fail:(void (^)(NSString * _Nullable msg, NSError * _Nullable error))fail {
     NSString *userID = @"";
     if (self.userid) {
         userID = [self.userid stringValue];
     }
+    if (!message) {
+        message = @"";
+    }
     NSDictionary *param = @{
                             @"userid"    : userID,
                             @"cost"      : cost,
                             @"amount"    : amount,
+                            @"message"   : message,
                             @"latitude"  : latitude,
                             @"longitude" : longitude,
                             };

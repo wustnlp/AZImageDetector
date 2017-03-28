@@ -37,6 +37,7 @@ typedef void(^AZZClientFail)(NSHTTPURLResponse * _Nullable response, id _Nullabl
                                                      amount:(nonnull NSString *)amount
                                                    latitude:(nonnull NSString *)latitude
                                                   longitude:(nonnull NSString *)longitude
+                                                    message:(nullable NSString *)message
                                                     success:(nullable void (^)(NSString * _Nullable msg))success
                                                        fail:(void (^ _Nullable)(NSString * _Nullable msg, NSError * _Nullable error))fail;
 

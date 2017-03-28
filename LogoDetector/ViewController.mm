@@ -15,7 +15,7 @@
 
 @interface ViewController () <CvPhotoCameraDelegate, UITextFieldDelegate>
 
-@property (nonatomic, weak) IBOutlet UIView *vInputs;
+@property (nonatomic, weak) IBOutlet UIImageView *vInputs;
 @property (nonatomic, weak) IBOutlet UIView *vLeft;
 @property (nonatomic, weak) IBOutlet UIView *vRight;
 @property (nonatomic, weak) IBOutlet UIView *vTop;
@@ -74,6 +74,8 @@
 }
 
 - (void)setupAnimatedImage {
+    self.vInputs.image = [UIImage imageNamed:@"u134"];
+    self.vInputs.contentMode = UIViewContentModeScaleToFill;
     self.imgViewResult.tintColor = [UIColor redColor];
     self.imgViewResult.lineWidth = 2;
     self.imgViewResult.translatesAutoresizingMaskIntoConstraints = NO;
@@ -83,9 +85,9 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == self.tfCost) {
-        [self.tfAmount becomeFirstResponder];
-    } else if (textField == self.tfAmount) {
+    if (textField == self.tfAmount) {
+        [self.tfCost becomeFirstResponder];
+    } else if (textField == self.tfCost) {
         [self.tfMessage becomeFirstResponder];
     } else {
         [self.tfMessage resignFirstResponder];
@@ -154,7 +156,7 @@
         NSString *cost = self.tfCost.text;
         NSString *amout = self.tfAmount.text;
         NSData *imageData = UIImagePNGRepresentation(self.imgResult);
-        [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi success:^(NSString * _Nullable msg) {
+        [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi message:self.tfMessage.text success:^(NSString * _Nullable msg) {
             [self showHudWithTitle:nil detail:msg];
             [self hideHudAfterDelay:3.f];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

@@ -138,7 +138,6 @@ static NSString *RotationAnimationKey = @"spinner.rotation";
     headAnimation2.toValue = @(0.f);
     headAnimation2.timingFunction = self.timingFunction;
     
-    
     CABasicAnimation *tailAnimation2 = [CABasicAnimation animation];
     tailAnimation2.keyPath = @"strokeEnd";
     tailAnimation2.duration = 1.f;

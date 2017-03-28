@@ -20,6 +20,7 @@
              @"remainAmount" : @"remainAmount",
              @"remainCost"   : @"remainCost",
              @"amount"       : @"amount",
+             @"message"      : @"message",
              };
 }
 

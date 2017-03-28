@@ -10,6 +10,8 @@
 #import "AZZHongBaoModel.h"
 #import "AZZHongBaoView.h"
 
+#import "UMSSpinnerView.h"
+
 #import "AZZClient.h"
 #import "AZZImageDetector.h"
 
@@ -21,6 +23,10 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *btnView;
 @property (nonatomic, strong) UIImageView *imageSee;
+@property (nonatomic, strong) UILabel *lbSee;
+@property (nonatomic, strong) UILabel *lbMessage;
+
+@property (nonatomic, strong) UMSSpinnerView *spinnerView;
 
 @property (nonatomic, strong) AZZImageDetector *detector;
 @property (nonatomic, strong) UIImage *imgPattern;
@@ -44,6 +50,7 @@
     self.detector.successBlock = ^(int index) {
         NSLog(@"detect:%@", @(index));
         [wself.detector stopProcess];
+        [wself showItems:NO];
         if (!wself.hongbaoView) {
             wself.hongbaoView = [AZZHongBaoView showInView:wself.view withModel:wself.model];
             wself.hongbaoView.delegate = wself;
@@ -75,13 +82,29 @@
         make.top.equalTo(self.view).with.offset(64.f);
         make.left.and.right.and.bottom.equalTo(self.view);
     }];
+    [self.spinnerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.spinnerView.mas_height);
+        make.left.and.right.equalTo(self.view);
+        make.centerY.equalTo(self.view);
+    }];
     [self.btnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.equalTo(self.imageView);
-        make.size.mas_equalTo(CGSizeMake(80, 40));
+        make.bottom.equalTo(self.view).with.offset(-40);
+        make.centerX.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    [self.lbSee mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.btnView);
+        make.top.equalTo(self.btnView.mas_bottom);
     }];
     [self.imageSee mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(self.imageView);
+        make.centerX.equalTo(self.btnView);
+        make.bottom.equalTo(self.btnView.mas_top);
         make.size.mas_equalTo(CGSizeMake(80, 80));
+    }];
+    [self.lbMessage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.top.equalTo(self.view).with.offset(80);
+        make.width.mas_equalTo(200);
     }];
 }
 
@@ -91,6 +114,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [self.detector startProcess];
+            [self showItems:YES];
         }
     }
 }
@@ -101,6 +125,13 @@
 
 - (void)btnViewTouchUp:(UIButton *)button {
     self.imageSee.hidden = YES;
+}
+
+- (void)showItems:(BOOL)show {
+    show ? [self.spinnerView startAnimating] : [self.spinnerView stopAnimating];
+    self.btnView.hidden = !show;
+    self.lbSee.hidden = !show;
+    self.lbMessage.hidden = !show;
 }
 
 #pragma mark - Property
@@ -132,15 +163,56 @@
     return _imageSee;
 }
 
+- (UILabel *)lbSee {
+    if (!_lbSee) {
+        _lbSee = [UILabel new];
+        _lbSee.textAlignment = NSTextAlignmentCenter;
+        _lbSee.textColor = [UIColor whiteColor];
+        _lbSee.text = @"按住看线索";
+        _lbSee.font = [UIFont systemFontOfSize:11.f];
+        _lbSee.hidden = YES;
+        [self.view addSubview:_lbSee];
+    }
+    return _lbSee;
+}
+
+- (UILabel *)lbMessage {
+    if (!_lbMessage) {
+        _lbMessage = [UILabel new];
+        _lbMessage.textAlignment = NSTextAlignmentCenter;
+        _lbMessage.textColor = [UIColor blackColor];
+        _lbMessage.numberOfLines = 0;
+        _lbMessage.text = self.model.message;
+        _lbMessage.hidden = YES;
+        [self.view addSubview:_lbMessage];
+    }
+    return _lbMessage;
+}
+
 - (UIButton *)btnView {
     if (!_btnView) {
         _btnView = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_btnView setTitle:@"看一下" forState:UIControlStateNormal];
+        [_btnView setBackgroundImage:[UIImage imageNamed:@"u128"] forState:UIControlStateNormal];
+        _btnView.contentMode = UIViewContentModeScaleAspectFit;
         [_btnView addTarget:self action:@selector(btnViewTouchDown:) forControlEvents:UIControlEventTouchDown];
         [_btnView addTarget:self action:@selector(btnViewTouchUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+        _btnView.hidden = YES;
         [self.view addSubview:_btnView];
     }
     return _btnView;
+}
+
+- (UMSSpinnerView *)spinnerView {
+    if (!_spinnerView) {
+        _spinnerView = [[UMSSpinnerView alloc] initWithFrame:CGRectZero];
+        _spinnerView.lineWidth = 2.f;
+        _spinnerView.tintColor = [UIColor redColor];
+        _spinnerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _spinnerView.userInteractionEnabled = NO;
+        _spinnerView.hidesWhenStopped = YES;
+        [self.view addSubview:_spinnerView];
+    }
+    return _spinnerView;
 }
 
 - (void)setModel:(AZZHongBaoModel *)model {
@@ -155,6 +227,7 @@
                     [self.view class];
                     self.imgPattern = image;
                     self.imageSee.image = image;
+                    [self showItems:YES];
                     [self.detector setPatterns:@[image]];
                     [self.detector startProcess];
                     [self hideHudAfterDelay:0];
