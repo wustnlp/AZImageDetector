@@ -1,8 +1,8 @@
 //
-//  AZZHongBaoView.h
+//  AZZOpenHongBaoView.h
 //  LogoDetector
 //
-//  Created by 朱安智 on 2017/1/19.
+//  Created by 朱安智 on 2017/3/30.
 //  Copyright © 2017年 Andrew. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 @class AZZHongBaoModel;
 
-@interface AZZHongBaoView : UIView
+@interface AZZOpenHongBaoView : UIView
 
 + (instancetype)showInView:(UIView *)view withModel:(AZZHongBaoModel *)model;
 - (void)showInView:(UIView *)view;

@@ -8,7 +8,7 @@
 
 #import "AZZScanHongBaoViewController.h"
 #import "AZZHongBaoModel.h"
-#import "AZZHongBaoView.h"
+#import "AZZOpenHongBaoView.h"
 
 #import "UMSSpinnerView.h"
 
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) AZZImageDetector *detector;
 @property (nonatomic, strong) UIImage *imgPattern;
 
-@property (nonatomic, strong) AZZHongBaoView *hongbaoView;
+@property (nonatomic, strong) AZZOpenHongBaoView *hongbaoView;
 
 @property (nonatomic, strong) id<SDWebImageOperation> downloadOperation;
 
@@ -52,7 +52,7 @@
         [wself.detector stopProcess];
         [wself showItems:NO];
         if (!wself.hongbaoView) {
-            wself.hongbaoView = [AZZHongBaoView showInView:wself.view withModel:wself.model];
+            wself.hongbaoView = [AZZOpenHongBaoView showInView:wself.view withModel:wself.model];
             wself.hongbaoView.delegate = wself;
         } else {
             [wself.hongbaoView showInView:wself.view];
@@ -108,7 +108,7 @@
     }];
 }
 
-- (void)hongbaoViewCancel:(AZZHongBaoView *)hongbaoView opened:(BOOL)opened {
+- (void)hongbaoViewCancel:(UIView *)hongbaoView opened:(BOOL)opened {
     if (hongbaoView == self.hongbaoView) {
         if (opened) {
             [self.navigationController popViewControllerAnimated:YES];
