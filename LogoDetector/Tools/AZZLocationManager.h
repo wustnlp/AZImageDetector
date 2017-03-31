@@ -22,5 +22,6 @@
 - (void)stopUpdatingLocation;
 - (void)getCurrentLocationWithBlock:(void (^)(CLLocation *location))block;
 - (void)getCurrentGCJCoordinateWithBlock:(void (^)(CLLocationCoordinate2D location))block;
+- (void)getCurrentPlacemarksWithBlock:(void (^)(NSArray<CLPlacemark *> *placeMarks))placeBlock;
 
 @end

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wbp-ga-8u5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wbp-ga-8u5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -398,6 +398,14 @@
                                     <constraint firstItem="f6b-m2-TI6" firstAttribute="top" secondItem="Ckp-mf-hvc" secondAttribute="top" constant="30" id="yGh-qP-aSp"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jom-pP-XXe" customClass="AZZLocationView">
+                                <rect key="frame" x="67" y="20" width="240" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="09M-ug-tjc"/>
+                                    <constraint firstAttribute="height" constant="40" id="0Mv-eS-AEZ"/>
+                                </constraints>
+                            </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-zp-KTM">
                                 <rect key="frame" x="138" y="456.5" width="100" height="30"/>
                                 <constraints>
@@ -443,8 +451,10 @@
                             <constraint firstItem="Orx-aK-GSH" firstAttribute="height" secondItem="jyb-sf-WpU" secondAttribute="height" id="Fgz-K0-1fz"/>
                             <constraint firstItem="Ffc-f5-fAN" firstAttribute="top" secondItem="5pP-FT-3Eq" secondAttribute="bottom" id="H1D-jH-Fk7"/>
                             <constraint firstItem="q5T-yL-jRk" firstAttribute="leading" secondItem="BnO-OL-Xht" secondAttribute="trailing" id="HCZ-o3-l06"/>
+                            <constraint firstItem="jom-pP-XXe" firstAttribute="top" secondItem="dMD-z7-c7X" secondAttribute="bottom" constant="20" id="HIY-WC-VIU"/>
                             <constraint firstItem="Gaq-zp-KTM" firstAttribute="centerX" secondItem="8sN-6M-txu" secondAttribute="centerX" id="LT4-gu-Bqt"/>
                             <constraint firstItem="JK8-QL-g83" firstAttribute="height" secondItem="Gaq-zp-KTM" secondAttribute="height" id="MT2-cG-Ghh"/>
+                            <constraint firstItem="jom-pP-XXe" firstAttribute="centerX" secondItem="8sN-6M-txu" secondAttribute="centerX" id="Pui-dD-X31"/>
                             <constraint firstItem="Ffc-f5-fAN" firstAttribute="top" secondItem="Orx-aK-GSH" secondAttribute="bottom" id="Zn6-V8-ycs"/>
                             <constraint firstItem="Orx-aK-GSH" firstAttribute="top" secondItem="jyb-sf-WpU" secondAttribute="bottom" constant="250" id="Zvr-bX-7b9"/>
                             <constraint firstAttribute="bottom" secondItem="Sff-fO-G09" secondAttribute="bottom" id="b1b-tg-t5X"/>
@@ -478,6 +488,7 @@
                         <outlet property="btnShot" destination="3z8-mK-9Bw" id="kAP-Fd-4bx"/>
                         <outlet property="imageView" destination="Sff-fO-G09" id="QFS-VS-1C4"/>
                         <outlet property="imgViewResult" destination="q5T-yL-jRk" id="AmR-43-UIS"/>
+                        <outlet property="locationView" destination="jom-pP-XXe" id="fvf-87-jam"/>
                         <outlet property="tfAmount" destination="dCi-AB-OoS" id="uFC-al-YRa"/>
                         <outlet property="tfCost" destination="os3-zR-afd" id="YpV-Ny-X65"/>
                         <outlet property="tfMessage" destination="YfE-wz-5pz" id="GjH-tt-UUK"/>

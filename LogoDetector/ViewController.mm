@@ -12,6 +12,7 @@
 #import "AZZClient.h"
 #import "AZZLocationManager.h"
 #import "UMSSpinnerView.h"
+#import "AZZLocationView.h"
 
 @interface ViewController () <CvPhotoCameraDelegate, UITextFieldDelegate>
 
@@ -33,6 +34,8 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) IBOutlet UMSSpinnerView *imgViewResult;
+
+@property (nonatomic, weak) IBOutlet AZZLocationView *locationView;
 
 @property (nonatomic, strong) UIImage *imgResult;
 

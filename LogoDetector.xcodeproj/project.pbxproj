@@ -40,6 +40,7 @@
 		499416DF1E7F7CAA0043E0D7 /* AZZGotHongBaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 499416DE1E7F7CAA0043E0D7 /* AZZGotHongBaoViewController.m */; };
 		499416E71E8A2E200043E0D7 /* UMSSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 499416E61E8A2E200043E0D7 /* UMSSpinnerView.m */; };
 		4994170D1E8CCB620043E0D7 /* AZZOpenHongBaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994170C1E8CCB620043E0D7 /* AZZOpenHongBaoView.m */; };
+		49B4F0BB1E8DF46300652955 /* AZZLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F0BA1E8DF46300652955 /* AZZLocationView.m */; };
 		BF79371D60E40897DF21929E /* libPods-LogoDetector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,8 @@
 		4994170B1E8CCB620043E0D7 /* AZZOpenHongBaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZOpenHongBaoView.h; path = View/AZZOpenHongBaoView.h; sourceTree = "<group>"; };
 		4994170C1E8CCB620043E0D7 /* AZZOpenHongBaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZOpenHongBaoView.m; path = View/AZZOpenHongBaoView.m; sourceTree = "<group>"; };
 		4994170E1E8CCBE60043E0D7 /* AZZHongBaoViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AZZHongBaoViewProtocol.h; path = View/AZZHongBaoViewProtocol.h; sourceTree = "<group>"; };
+		49B4F0B91E8DF46300652955 /* AZZLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZLocationView.h; path = View/AZZLocationView.h; sourceTree = "<group>"; };
+		49B4F0BA1E8DF46300652955 /* AZZLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZLocationView.m; path = View/AZZLocationView.m; sourceTree = "<group>"; };
 		78AB7F00BFEFC728D9B25F30 /* Pods-LogoDetector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.debug.xcconfig"; sourceTree = "<group>"; };
 		7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogoDetector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F8311D55F40B38B9A90FBD /* Pods-LogoDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.release.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 				4994170B1E8CCB620043E0D7 /* AZZOpenHongBaoView.h */,
 				4994170C1E8CCB620043E0D7 /* AZZOpenHongBaoView.m */,
 				4994170E1E8CCBE60043E0D7 /* AZZHongBaoViewProtocol.h */,
+				49B4F0B91E8DF46300652955 /* AZZLocationView.h */,
+				49B4F0BA1E8DF46300652955 /* AZZLocationView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				4924C64D1E289BE300EFDCDE /* AZZLocationManager.m in Sources */,
 				4924C6531E289D8200EFDCDE /* AZZMapViewController.m in Sources */,
 				4962C76B1E484DD20002A397 /* AZZSelectViewController.m in Sources */,
+				49B4F0BB1E8DF46300652955 /* AZZLocationView.m in Sources */,
 				4951F7FA1E1F3BA1005BE3E8 /* ViewController.mm in Sources */,
 				4924C6591E28A31800EFDCDE /* AZZBaseViewController.m in Sources */,
 				49150C8C1E308B0300638614 /* AZZHongBaoView.m in Sources */,

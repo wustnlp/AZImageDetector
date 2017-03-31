@@ -18,9 +18,11 @@ typedef void(^AZZPlaceCallBack)(NSArray<CLPlacemark *> *);
 @property (nonatomic, copy) AZZLocationCallBack callback;
 @property (nonatomic, copy) AZZPlaceCallBack placeCallback;
 @property (nonatomic, strong, readwrite) CLLocation *currentLocation;
+@property (nonatomic, copy) NSArray<CLPlacemark *> *currentPlacemarks;
 
 @property (nonatomic, copy) void (^getLocationBlock)(CLLocation *location);
 @property (nonatomic, copy) void (^getCoordinateBlock)(CLLocationCoordinate2D coor);
+@property (nonatomic, copy) void (^getPlacemarkBlock)(NSArray<CLPlacemark *> *placemarks);
 
 @end
 
@@ -66,6 +68,15 @@ typedef void(^AZZPlaceCallBack)(NSArray<CLPlacemark *> *);
     }
 }
 
+- (void)getCurrentPlacemarksWithBlock:(void (^)(NSArray<CLPlacemark *> *placeMarks))placeBlock {
+    [self.locationManager startUpdatingLocation];
+    if (self.currentPlacemarks) {
+        placeBlock(self.currentPlacemarks);
+    } else {
+        self.getPlacemarkBlock = placeBlock;
+    }
+}
+
 - (void)startUpdatingLocationWithBlock:(void (^)(NSArray<CLLocation *> *locations))block placeCallback:(void (^)(NSArray<CLPlacemark *> *placeMarks))placeBlock {
     self.callback = block;
     self.placeCallback = placeBlock;
@@ -98,6 +109,11 @@ typedef void(^AZZPlaceCallBack)(NSArray<CLPlacemark *> *);
         [coder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
             if (self.placeCallback) {
                 self.placeCallback(placemarks);
+            }
+            self.currentPlacemarks = placemarks;
+            if (self.getPlacemarkBlock) {
+                self.getPlacemarkBlock(self.currentPlacemarks);
+                self.getPlacemarkBlock = nil;
             }
         }];
     }
