@@ -14,6 +14,7 @@
 
 #import "AZZClient.h"
 #import "AZZImageDetector.h"
+#import "AZZImageRotate.h"
 
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImageManager.h>
@@ -224,11 +225,12 @@
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             if (finished && image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *newImage = [AZZImageRotate rotateImage:image orientation:UIImageOrientationLeft];
                     [self.view class];
-                    self.imgPattern = image;
-                    self.imageSee.image = image;
+                    self.imgPattern = newImage;
+                    self.imageSee.image = newImage;
                     [self showItems:YES];
-                    [self.detector setPatterns:@[image]];
+                    [self.detector setPatterns:@[newImage]];
                     [self.detector startProcess];
                     [self hideHudAfterDelay:0];
                 });

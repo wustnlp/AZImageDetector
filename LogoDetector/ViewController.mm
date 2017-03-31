@@ -14,6 +14,7 @@
 #import "UMSSpinnerView.h"
 #import "AZZLocationView.h"
 #import "AZZSendHongbaoSuccessView.h"
+#import "AZZImageRotate.h"
 
 #import <Masonry/Masonry.h>
 
@@ -158,12 +159,12 @@
     }
     
     [self showHudWithTitle:nil detail:nil];
+    NSData *imageData = UIImagePNGRepresentation([AZZImageRotate rotateImage:self.imgResult orientation:UIImageOrientationRight]);
     [AZZLocationManagerInstance getCurrentGCJCoordinateWithBlock:^(CLLocationCoordinate2D location) {
         NSString *lati = [@(location.latitude) stringValue];
         NSString *longi = [@(location.longitude) stringValue];
         NSString *cost = self.tfCost.text;
         NSString *amout = self.tfAmount.text;
-        NSData *imageData = UIImagePNGRepresentation(self.imgResult);
         [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi message:self.tfMessage.text success:^(NSString * _Nullable msg) {
             [self hideHudAfterDelay:0];
             [self showResultView];

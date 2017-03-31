@@ -42,6 +42,7 @@
 		4994170D1E8CCB620043E0D7 /* AZZOpenHongBaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4994170C1E8CCB620043E0D7 /* AZZOpenHongBaoView.m */; };
 		49B4F0BB1E8DF46300652955 /* AZZLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F0BA1E8DF46300652955 /* AZZLocationView.m */; };
 		49C745AB1E8DFFCD006E4348 /* AZZSendHongbaoSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C745AA1E8DFFCD006E4348 /* AZZSendHongbaoSuccessView.m */; };
+		49C745AE1E8E1B2A006E4348 /* AZZImageRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C745AD1E8E1B2A006E4348 /* AZZImageRotate.m */; };
 		BF79371D60E40897DF21929E /* libPods-LogoDetector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		49B4F0BA1E8DF46300652955 /* AZZLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZLocationView.m; path = View/AZZLocationView.m; sourceTree = "<group>"; };
 		49C745A91E8DFFCD006E4348 /* AZZSendHongbaoSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZSendHongbaoSuccessView.h; path = View/AZZSendHongbaoSuccessView.h; sourceTree = "<group>"; };
 		49C745AA1E8DFFCD006E4348 /* AZZSendHongbaoSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZSendHongbaoSuccessView.m; path = View/AZZSendHongbaoSuccessView.m; sourceTree = "<group>"; };
+		49C745AC1E8E1B2A006E4348 /* AZZImageRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZImageRotate.h; path = Tools/AZZImageRotate.h; sourceTree = "<group>"; };
+		49C745AD1E8E1B2A006E4348 /* AZZImageRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZImageRotate.m; path = Tools/AZZImageRotate.m; sourceTree = "<group>"; };
 		78AB7F00BFEFC728D9B25F30 /* Pods-LogoDetector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.debug.xcconfig"; sourceTree = "<group>"; };
 		7E06BEEA943217F144B8663B /* libPods-LogoDetector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LogoDetector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F8311D55F40B38B9A90FBD /* Pods-LogoDetector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LogoDetector.release.xcconfig"; path = "Pods/Target Support Files/Pods-LogoDetector/Pods-LogoDetector.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				4924C6461E289BE300EFDCDE /* AZZImageDetector.mm */,
 				4924C6471E289BE300EFDCDE /* AZZImageUtils.h */,
 				4924C6481E289BE300EFDCDE /* AZZImageUtils.mm */,
+				49C745AC1E8E1B2A006E4348 /* AZZImageRotate.h */,
+				49C745AD1E8E1B2A006E4348 /* AZZImageRotate.m */,
 				4924C6491E289BE300EFDCDE /* AZZLocationManager.h */,
 				4924C64A1E289BE300EFDCDE /* AZZLocationManager.m */,
 			);
@@ -426,6 +431,7 @@
 				499416DF1E7F7CAA0043E0D7 /* AZZGotHongBaoViewController.m in Sources */,
 				499416D91E7F6F240043E0D7 /* AZZUserCenterViewController.m in Sources */,
 				4951F7F71E1F3BA1005BE3E8 /* AppDelegate.m in Sources */,
+				49C745AE1E8E1B2A006E4348 /* AZZImageRotate.m in Sources */,
 				4924C6401E289BC100EFDCDE /* AZZClient.m in Sources */,
 				4924C64C1E289BE300EFDCDE /* AZZImageUtils.mm in Sources */,
 				49150C891E30844B00638614 /* AZZHongBaoGotUserModel.m in Sources */,
