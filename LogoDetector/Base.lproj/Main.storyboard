@@ -282,22 +282,22 @@
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5pP-FT-3Eq">
                                 <rect key="frame" x="313" y="0.0" width="62" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="0.4726027397260274" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.54794520547945202" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BnO-OL-Xht">
                                 <rect key="frame" x="0.0" y="0.0" width="63" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="0.4726027397260274" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.54794520547945202" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyb-sf-WpU">
                                 <rect key="frame" x="63" y="0.0" width="250" height="176.5"/>
-                                <color key="backgroundColor" white="1" alpha="0.4726027397260274" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.54794520547945202" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="Cj0-Np-zBr"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Orx-aK-GSH">
                                 <rect key="frame" x="63" y="426.5" width="250" height="176.5"/>
-                                <color key="backgroundColor" white="1" alpha="0.4726027397260274" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.54794520547945202" colorSpace="calibratedWhite"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckp-mf-hvc" customClass="UIImageView">
                                 <rect key="frame" x="27" y="101.5" width="320" height="400"/>
@@ -441,7 +441,23 @@
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnQ-8l-7kZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.71232876712328763" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I29-gK-fGX">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wtO-wI-rW1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="I29-gK-fGX" firstAttribute="top" secondItem="lnQ-8l-7kZ" secondAttribute="top" id="Uv5-Ig-y9r"/>
+                                    <constraint firstItem="I29-gK-fGX" firstAttribute="leading" secondItem="lnQ-8l-7kZ" secondAttribute="leading" id="VbI-wN-cfC"/>
+                                    <constraint firstAttribute="trailing" secondItem="I29-gK-fGX" secondAttribute="trailing" id="bUr-EX-5Me"/>
+                                    <constraint firstAttribute="bottom" secondItem="I29-gK-fGX" secondAttribute="bottom" id="ev2-CH-CIG"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
