@@ -13,6 +13,9 @@
 #import "AZZLocationManager.h"
 #import "UMSSpinnerView.h"
 #import "AZZLocationView.h"
+#import "AZZSendHongbaoSuccessView.h"
+
+#import <Masonry/Masonry.h>
 
 @interface ViewController () <CvPhotoCameraDelegate, UITextFieldDelegate>
 
@@ -36,6 +39,8 @@
 @property (nonatomic, weak) IBOutlet UMSSpinnerView *imgViewResult;
 
 @property (nonatomic, weak) IBOutlet AZZLocationView *locationView;
+
+@property (nonatomic, weak) IBOutlet UIView *successBackground;
 
 @property (nonatomic, strong) UIImage *imgResult;
 
@@ -160,11 +165,13 @@
         NSString *amout = self.tfAmount.text;
         NSData *imageData = UIImagePNGRepresentation(self.imgResult);
         [AZZClientInstance requestUploadHongBaoWith:imageData cost:cost amount:amout latitude:lati longitude:longi message:self.tfMessage.text success:^(NSString * _Nullable msg) {
-            [self showHudWithTitle:nil detail:msg];
-            [self hideHudAfterDelay:3.f];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
+            [self hideHudAfterDelay:0];
+            [self showResultView];
+//            [self showHudWithTitle:nil detail:msg];
+//            [self hideHudAfterDelay:3.f];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self.navigationController popViewControllerAnimated:YES];
+//            });
         } fail:^(NSString * _Nullable msg, NSError * _Nullable error) {
             [self showHudWithTitle:msg detail:[NSString stringWithFormat:@"domain:%@ code:%@ description:%@", error.domain, @(error.code), error.localizedDescription]];
             [self hideHudAfterDelay:10.f];
@@ -199,6 +206,23 @@
 
 - (void)showInputs:(BOOL)show {
     self.vInputs.hidden = !show;
+}
+
+- (void)showResultView {
+    [self showInputs:NO];
+    self.successBackground.hidden = NO;
+    self.locationView.hidden = YES;
+    __weak typeof(self) wself = self;
+    AZZSendHongbaoSuccessView *view = [AZZSendHongbaoSuccessView viewWithImage:self.imgResult callFriendsCallback:^{
+        
+    } doneCallback:^{
+        [wself.navigationController popViewControllerAnimated:YES];
+    }];
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.vInputs);
+    }];
+    [view setNeedsLayout];
 }
 
 - (void)dealWithImage:(UIImage *)image {

@@ -336,7 +336,7 @@
                                         <rect key="frame" x="149.5" y="187" width="140.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                        <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="aRC-EH-v4K" id="ZOg-Bc-CRp"/>
                                         </connections>
@@ -439,6 +439,10 @@
                                     <action selector="btnReTakePhoto:" destination="aRC-EH-v4K" eventType="touchUpInside" id="IkR-i2-Yh0"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnQ-8l-7kZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.71232876712328763" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -446,6 +450,7 @@
                             <constraint firstItem="Orx-aK-GSH" firstAttribute="centerX" secondItem="Gaq-zp-KTM" secondAttribute="centerX" id="2Av-sw-gS6"/>
                             <constraint firstAttribute="trailing" secondItem="5pP-FT-3Eq" secondAttribute="trailing" id="57g-Fy-AhF"/>
                             <constraint firstItem="jyb-sf-WpU" firstAttribute="top" secondItem="dMD-z7-c7X" secondAttribute="bottom" id="6Dv-SN-MQU"/>
+                            <constraint firstAttribute="trailing" secondItem="lnQ-8l-7kZ" secondAttribute="trailing" id="7XP-u2-NHW"/>
                             <constraint firstItem="3z8-mK-9Bw" firstAttribute="top" secondItem="Gaq-zp-KTM" secondAttribute="bottom" constant="8" id="CAG-Zd-Lgi"/>
                             <constraint firstItem="5pP-FT-3Eq" firstAttribute="leading" secondItem="jyb-sf-WpU" secondAttribute="trailing" id="Dun-LX-IUe"/>
                             <constraint firstItem="Orx-aK-GSH" firstAttribute="height" secondItem="jyb-sf-WpU" secondAttribute="height" id="Fgz-K0-1fz"/>
@@ -453,7 +458,10 @@
                             <constraint firstItem="q5T-yL-jRk" firstAttribute="leading" secondItem="BnO-OL-Xht" secondAttribute="trailing" id="HCZ-o3-l06"/>
                             <constraint firstItem="jom-pP-XXe" firstAttribute="top" secondItem="dMD-z7-c7X" secondAttribute="bottom" constant="20" id="HIY-WC-VIU"/>
                             <constraint firstItem="Gaq-zp-KTM" firstAttribute="centerX" secondItem="8sN-6M-txu" secondAttribute="centerX" id="LT4-gu-Bqt"/>
+                            <constraint firstItem="Ffc-f5-fAN" firstAttribute="top" secondItem="lnQ-8l-7kZ" secondAttribute="bottom" id="Loi-SG-tWX"/>
                             <constraint firstItem="JK8-QL-g83" firstAttribute="height" secondItem="Gaq-zp-KTM" secondAttribute="height" id="MT2-cG-Ghh"/>
+                            <constraint firstItem="lnQ-8l-7kZ" firstAttribute="leading" secondItem="8sN-6M-txu" secondAttribute="leading" id="NZh-iW-ZS3"/>
+                            <constraint firstItem="lnQ-8l-7kZ" firstAttribute="top" secondItem="dMD-z7-c7X" secondAttribute="bottom" id="P2G-WV-SUG"/>
                             <constraint firstItem="jom-pP-XXe" firstAttribute="centerX" secondItem="8sN-6M-txu" secondAttribute="centerX" id="Pui-dD-X31"/>
                             <constraint firstItem="Ffc-f5-fAN" firstAttribute="top" secondItem="Orx-aK-GSH" secondAttribute="bottom" id="Zn6-V8-ycs"/>
                             <constraint firstItem="Orx-aK-GSH" firstAttribute="top" secondItem="jyb-sf-WpU" secondAttribute="bottom" constant="250" id="Zvr-bX-7b9"/>
@@ -489,6 +497,7 @@
                         <outlet property="imageView" destination="Sff-fO-G09" id="QFS-VS-1C4"/>
                         <outlet property="imgViewResult" destination="q5T-yL-jRk" id="AmR-43-UIS"/>
                         <outlet property="locationView" destination="jom-pP-XXe" id="fvf-87-jam"/>
+                        <outlet property="successBackground" destination="lnQ-8l-7kZ" id="9GH-sk-d01"/>
                         <outlet property="tfAmount" destination="dCi-AB-OoS" id="uFC-al-YRa"/>
                         <outlet property="tfCost" destination="os3-zR-afd" id="YpV-Ny-X65"/>
                         <outlet property="tfMessage" destination="YfE-wz-5pz" id="GjH-tt-UUK"/>
