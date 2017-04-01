@@ -22,6 +22,8 @@
 @interface AZZScanHongBaoViewController () <AZZHongBaoViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIVisualEffectView *effectView;
+
 @property (nonatomic, strong) UIButton *btnView;
 @property (nonatomic, strong) UIImageView *imageSee;
 @property (nonatomic, strong) UILabel *lbSee;
@@ -48,7 +50,7 @@
     [self showHudWithTitle:@"请稍等" detail:@"正在下载图片"];
     
     __weak typeof(self) wself = self;
-    self.detector.successBlock = ^(int index) {
+    self.detector.successBlock = ^(int index, UIImage *image) {
         NSLog(@"detect:%@", @(index));
         [wself.detector stopProcess];
         [wself showItems:NO];
@@ -58,6 +60,7 @@
         } else {
             [wself.hongbaoView showInView:wself.view];
         }
+        wself.imageView.image = image;
     };
     self.detector.failBlock = ^(int index) {
         NSLog(@"lose:%@", @(index));
@@ -107,6 +110,9 @@
         make.top.equalTo(self.view).with.offset(80);
         make.width.mas_equalTo(200);
     }];
+    [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.imageView);
+    }];
 }
 
 - (void)hongbaoViewCancel:(UIView *)hongbaoView opened:(BOOL)opened {
@@ -133,6 +139,7 @@
     self.btnView.hidden = !show;
     self.lbSee.hidden = !show;
     self.lbMessage.hidden = !show;
+    self.effectView.hidden = show;
 }
 
 #pragma mark - Property
@@ -214,6 +221,16 @@
         [self.view addSubview:_spinnerView];
     }
     return _spinnerView;
+}
+
+- (UIVisualEffectView *)effectView {
+    if (!_effectView) {
+        UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        _effectView.hidden = YES;
+        [self.imageView addSubview:_effectView];
+    }
+    return _effectView;
 }
 
 - (void)setModel:(AZZHongBaoModel *)model {

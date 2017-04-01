@@ -26,6 +26,7 @@ using namespace cv;
 }
 
 @property (nonatomic, strong) CvVideoCamera *camera;
+@property (nonatomic, strong) UIImage *image;
 
 @end
 
@@ -320,6 +321,7 @@ using namespace cv;
                     if (debug) {
                         NSLog(@"detecting for index - %d", (int)idx);
                     }
+                    self.image = [AZZImageUtils UIImageFromCVMat:image];
                     [self updateState:YES index:(int)idx];
                     if(save_files) {
                         UIImageWriteToSavedPhotosAlbum([AZZImageUtils UIImageFromCVMat:gray], nil, nil, nil);
@@ -382,7 +384,7 @@ using namespace cv;
         // Call Success Here
         if (self.successBlock) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                self.successBlock(idx);
+                self.successBlock(idx, self.image);
             });
         }
         called_success_detection = true;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^AZZImageDetector_Success)(int index);
+typedef void(^AZZImageDetector_Success)(int index, UIImage *image);
 typedef void(^AZZImageDetector_Fail)(int index);
 
 @interface AZZImageDetector : NSObject
