@@ -184,12 +184,14 @@ using namespace cv;
 */
                     Mat image_copy = image.clone()(cvRect(0, y, width, width));
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [self backgroundImageProcessing: image_copy pattern:patt keypoints:kp1 descriptor:desc1 index:i];
-                        dispatch_sync(dispatch_get_main_queue(), ^{
-                            if(i == (triggers.size() - 1)) {
-                                thread_over = YES;
-                            }
-                        });
+                        if (self) {
+                            [self backgroundImageProcessing: image_copy pattern:patt keypoints:kp1 descriptor:desc1 index:i];
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                if(i == (triggers.size() - 1)) {
+                                    thread_over = YES;
+                                }
+                            });
+                        }
                     });
                 }
             }

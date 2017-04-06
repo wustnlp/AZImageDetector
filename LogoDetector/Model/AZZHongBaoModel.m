@@ -7,6 +7,7 @@
 //
 
 #import "AZZHongBaoModel.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation AZZHongBaoModel
 
@@ -40,6 +41,26 @@
         NSLog(@"get %@ models from:%@ error:%@", self.class, arr, error.localizedDescription);
     }
     return result;
+}
+
+- (BOOL)sameLocationWithModel:(AZZHongBaoModel *)model {
+    return (self.latitude == model.latitude) && (self.longitude == model.longitude);
+}
+
++ (NSDictionary<NSString *, NSArray<AZZHongBaoModel *> *> *)modelWithLocations:(NSArray<AZZHongBaoModel *> *)models {
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
+    for (AZZHongBaoModel *model in models) {
+        NSString *location = [NSString stringWithFormat:@"%.4fX%.4f", model.latitude, model.longitude];
+//        CLLocation *location = [[CLLocation alloc] initWithLatitude:model.latitude longitude:model.longitude];
+        NSArray *array = [tempDic objectForKey:location];
+        if (!array) {
+            array = [NSArray array];
+        }
+        NSMutableArray *marray = array.mutableCopy;
+        [marray addObject:model];
+        [tempDic setObject:marray.copy forKey:location];
+    }
+    return tempDic.copy;
 }
 
 @end

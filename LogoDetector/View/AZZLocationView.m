@@ -37,11 +37,13 @@
     self.backgroundColor = [UIColor colorWithRed:0.584 green:0.651 blue:0.804 alpha:0.500];
     [self.icon mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(20, 20));
-        make.right.equalTo(self.lbLocation.mas_left).with.offset(-8);
+        make.right.equalTo(self.lbLocation.mas_left).with.offset(-5);
         make.centerY.equalTo(self);
+        make.left.equalTo(self).with.offset(5);
     }];
     [self.lbLocation mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
+        make.right.equalTo(self).with.offset(-5);
     }];
 }
 

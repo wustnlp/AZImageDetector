@@ -66,7 +66,7 @@
     [self.locationView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgPic.mas_bottom).with.offset(20);
         make.centerX.equalTo(self.imgPic);
-        make.width.equalTo(self.imgPic).with.offset(-20);
+//        make.width.equalTo(self.imgPic).with.offset(-20);
     }];
     [self.btnCallFriends mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.locationView);

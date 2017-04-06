@@ -22,5 +22,7 @@
 
 + (instancetype)hongBaoModelFromDictionary:(NSDictionary *)dic;
 + (NSArray<AZZHongBaoModel *> *)hongBaoModelsFromArray:(NSArray *)arr;
+- (BOOL)sameLocationWithModel:(AZZHongBaoModel *)model;
++ (NSDictionary<NSString *, NSArray<AZZHongBaoModel *> *> *)modelWithLocations:(NSArray<AZZHongBaoModel *> *)models;
 
 @end

@@ -13,6 +13,7 @@
 
 #import "AZZHongBaoModel.h"
 #import "AZZMapAnnotation.h"
+#import "AZZHongbaoAnnotationView.h"
 
 #import <Masonry/Masonry.h>
 #import <MapKit/MapKit.h>
@@ -55,8 +56,17 @@
     NSLog(@"cl user lati:%@ longi:%@", latitude, longitude);
     [AZZClientInstance requestRelatedHongBaoWithLatitude:latitude longitude:longitude success:^(NSArray<AZZHongBaoModel *> * _Nullable arrHongBao) {
         NSMutableArray *annotations = [NSMutableArray array];
-        for (AZZHongBaoModel *model in arrHongBao) {
-            AZZMapAnnotation *annotation = [AZZMapAnnotation annotationWithModel:model];
+        NSDictionary *modelDic = [AZZHongBaoModel modelWithLocations:arrHongBao];
+        for (NSString *key in modelDic) {
+            NSArray *latiAndLongi = [key componentsSeparatedByString:@"X"];
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:[latiAndLongi[0] floatValue] longitude:[latiAndLongi[1] floatValue]];
+            AZZMapAnnotation *annotation = nil;
+            NSArray *models = modelDic[key];
+            if (models.count > 1) {
+                annotation = [AZZMapAnnotation annotationWithLocation:location models:models];
+            } else {
+                annotation = [AZZMapAnnotation annotationWithModel:models[0]];
+            }
             [annotations addObject:annotation];
         }
         self.arrAnnotations = annotations;
@@ -102,15 +112,16 @@
     if (annotation == mapView.userLocation) {
         return nil;
     }
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"HongBao"];
+    AZZHongbaoAnnotationView *annotationView = (AZZHongbaoAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:NSStringFromClass([AZZHongbaoAnnotationView class])];
     if (!annotationView) {
-        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"HongBao"];
-        CGRect frame = annotationView.frame;
-        frame.size = CGSizeMake(40, 40);
-        annotationView.frame = frame;
-        annotationView.image = [UIImage imageNamed:@"hongbao_annotation"];
-//        annotationView.canShowCallout = YES;
+        annotationView = [AZZHongbaoAnnotationView annotationViewWithMapView:mapView annotation:annotation];
     }
+    __weak typeof(self) wself = self;
+    annotationView.callback = ^(AZZHongBaoModel *model) {
+        AZZScanHongBaoViewController *vc = [AZZScanHongBaoViewController new];
+        vc.model = model;
+        [wself.navigationController pushViewController:vc animated:YES];
+    };
     annotationView.draggable = NO;
     return annotationView;
 }
@@ -129,9 +140,6 @@
         return;
     }
     
-    AZZScanHongBaoViewController *vc = [AZZScanHongBaoViewController new];
-    vc.model = annotation.model;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {

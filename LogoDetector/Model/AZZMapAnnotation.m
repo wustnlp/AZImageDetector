@@ -15,6 +15,7 @@
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readwrite, copy) NSString *title;
 @property (nonatomic, strong, readwrite) AZZHongBaoModel *model;
+@property (nonatomic, copy, readwrite) NSArray<AZZHongBaoModel *> *models;
 
 @end
 
@@ -29,6 +30,14 @@
     instance.title = title;
     instance.coordinate = CLLocationCoordinate2DMake(model.latitude, model.longitude);
     instance.model = model;
+    return instance;
+}
+
++ (AZZMapAnnotation *)annotationWithLocation:(CLLocation *)location models:(NSArray<AZZHongBaoModel *> *)models {
+    AZZMapAnnotation *instance = [[AZZMapAnnotation alloc] init];
+    instance.title = @"";
+    instance.coordinate = location.coordinate;
+    instance.models = models;
     return instance;
 }
 
